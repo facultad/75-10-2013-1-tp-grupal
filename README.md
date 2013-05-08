@@ -1,6 +1,9 @@
-TP Grupal de Técnicas de Diseño
+#TP Grupal de Técnicas de Diseño
 Grupo conformado por:
-Nahuel Tori
-Sebastian Goldberg
-Gastón  Sabatelli
-Ezequiel Aceto
+<ol>
+<li>Nahuel Tori</li>
+<li>Sebastian Goldberg</li>
+<li>Gastón  Sabatelli</li>
+<li>Ezequiel Aceto</li>
+</ol>
+
