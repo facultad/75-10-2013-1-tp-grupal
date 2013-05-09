@@ -4,6 +4,8 @@
 #netbeans ignore personal stuff 
 nbproject/private/
 
+#eclipse ignore workspace
+.metadata/
 
 ## generic files to ignore
 *~
