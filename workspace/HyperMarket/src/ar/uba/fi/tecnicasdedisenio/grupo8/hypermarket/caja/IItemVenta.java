@@ -5,4 +5,6 @@ public interface IItemVenta {
 
 	IProducto getProducto();
 
+	int getCantidadProductos();
+
 }

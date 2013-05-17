@@ -9,15 +9,18 @@ public class ItemVentaMock implements IItemVenta{
 	private int cantidad;
 
 	public ItemVentaMock(IProducto producto, int cantidad) {
-		// TODO Auto-generated constructor stub
 		this.producto=producto;
 		this.cantidad=cantidad;
 	}
 
 	@Override
 	public IProducto getProducto() {
-		// TODO Auto-generated method stub
 		return this.producto;
+	}
+
+	@Override
+	public int getCantidadProductos() {
+		return this.cantidad;
 	}
 
 }

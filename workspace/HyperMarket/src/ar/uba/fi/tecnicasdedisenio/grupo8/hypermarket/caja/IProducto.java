@@ -4,4 +4,6 @@ public interface IProducto {
 
 	int getId();
 
+	double getPrecioUnitario();
+
 }

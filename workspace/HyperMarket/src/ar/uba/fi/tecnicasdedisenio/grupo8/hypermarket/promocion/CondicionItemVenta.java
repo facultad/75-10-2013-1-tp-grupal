@@ -1,5 +1,5 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
-public class CondicionItemVenta implements ICondicionPromocion{
+public abstract class CondicionItemVenta implements ICondicionPromocion{
 
 }
