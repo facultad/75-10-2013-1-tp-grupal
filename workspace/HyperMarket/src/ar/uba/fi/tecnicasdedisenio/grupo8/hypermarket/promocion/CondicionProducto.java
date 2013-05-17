@@ -7,15 +7,28 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 public class CondicionProducto extends CondicionItemVenta{
 
 	private IProducto producto;
+	private boolean _negada;
 
 	public CondicionProducto(IProducto producto) {
-		// TODO Auto-generated constructor stub
 		this.producto=producto;
 	}
 
 	public boolean valida(IItemVenta itemVenta) {
-		// TODO Auto-generated method stub
+		if (this.negada())
+			return !evaluarCondicion(itemVenta);	
+		return evaluarCondicion(itemVenta);
+	}
+
+	private boolean evaluarCondicion(IItemVenta itemVenta) {
 		return this.producto.getId()==itemVenta.getProducto().getId();
+	}
+
+	public void negar() {
+		this._negada=(!this.negada());
+	}
+
+	private boolean negada() {
+		return this._negada;
 	}
 
 }

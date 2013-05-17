@@ -14,20 +14,34 @@ public class CondicionProductoTest {
 
 	@Test
 	public void pasaCondicion() {
-		IProducto producto=this.obtenerCualquierProducto();
+		IProducto producto=new ProductoMock(1);
 		CondicionProducto condicion=new CondicionProducto(producto);
-		IItemVenta itemVenta=this.obtenerCualquierItemVenta(producto);
+		IItemVenta itemVenta=new ItemVentaMock(producto,10);
 		assertTrue(condicion.valida(itemVenta));
 	}
-
-	private IItemVenta obtenerCualquierItemVenta(IProducto producto) {
-		// TODO Auto-generated method stub
-		return new ItemVentaMock(producto,10);
+	
+	@Test
+	public void noPasaCondicion() {
+		CondicionProducto condicion=new CondicionProducto(new ProductoMock(1));
+		IItemVenta itemVenta=new ItemVentaMock(new ProductoMock(2),10);
+		assertFalse(condicion.valida(itemVenta));
+	}
+	
+	@Test
+	public void noPasaCondicionNegada() {
+		IProducto producto=new ProductoMock(1);
+		CondicionProducto condicion=new CondicionProducto(producto);
+		condicion.negar();
+		IItemVenta itemVenta=new ItemVentaMock(producto,10);
+		assertFalse(condicion.valida(itemVenta));
 	}
 
-	private IProducto obtenerCualquierProducto() {
-		// TODO Auto-generated method stub
-		return new ProductoMock(1);
+	@Test
+	public void pasaCondicionNegada() {
+		CondicionProducto condicion=new CondicionProducto(new ProductoMock(1));
+		condicion.negar();
+		IItemVenta itemVenta=new ItemVentaMock(new ProductoMock(2),10);
+		assertTrue(condicion.valida(itemVenta));
 	}
 
 }
