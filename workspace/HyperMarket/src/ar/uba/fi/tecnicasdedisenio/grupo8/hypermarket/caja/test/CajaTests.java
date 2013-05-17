@@ -1,4 +1,4 @@
-package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.tests;
+package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.test;
 
 import static org.junit.Assert.*;
 
