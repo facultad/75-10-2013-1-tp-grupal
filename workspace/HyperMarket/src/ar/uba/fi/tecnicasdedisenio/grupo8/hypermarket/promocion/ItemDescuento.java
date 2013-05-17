@@ -11,7 +11,6 @@ public class ItemDescuento {
 	private RepositorioPromociones repositorioPromociones;
 
 	public ItemDescuento(IItemVenta itemVenta, RepositorioPromociones repositorioPromociones) {
-		// TODO Auto-generated constructor stub
 		this.setItemVenta(itemVenta);
 		this.setRepositorioPromociones(repositorioPromociones);
 	}
