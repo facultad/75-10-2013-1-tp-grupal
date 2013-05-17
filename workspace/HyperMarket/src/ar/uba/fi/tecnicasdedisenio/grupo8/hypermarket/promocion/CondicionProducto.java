@@ -1,7 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.caja.IItemVenta;
 
 
 public class CondicionProducto extends CondicionItemVenta{

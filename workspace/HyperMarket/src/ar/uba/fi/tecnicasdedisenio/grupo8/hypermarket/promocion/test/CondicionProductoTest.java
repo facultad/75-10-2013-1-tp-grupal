@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CondicionProducto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 
