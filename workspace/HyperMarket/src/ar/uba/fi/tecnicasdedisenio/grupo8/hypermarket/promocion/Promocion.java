@@ -1,17 +1,18 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.PromocionNoAplicaParaItemVenta;
 
 public class Promocion {
 
 	private ICondicionPromocion condicion;
 	private int cantidadProductosAplica;
-	private double porcentajeADescontar;
+	private double coeficienteDescuento;
 
-	public Promocion(ICondicionPromocion condicion, int cantidadProductosAplica, double porcentajeADescontar) {
+	public Promocion(ICondicionPromocion condicion, int cantidadProductosAplica, double coeficienteDescuento) {
 		this.setCondicion(condicion);
 		this.setCantidadProductosAplica(cantidadProductosAplica);
-		this.setPorcentajeADescontar(porcentajeADescontar);
+		this.setCoeficienteDescuento(coeficienteDescuento);
 	}
 
 	public ICondicionPromocion getCondicion() {
@@ -23,13 +24,17 @@ public class Promocion {
 	}
 
 	public double getImporteADescontar(IItemVenta itemVenta) {
+		if (!this.aplicaParaItemVenta(itemVenta))
+			throw new PromocionNoAplicaParaItemVenta();
 		return this.getCantidadProductosAplicaParaItemVenta(itemVenta)*
 			itemVenta.getProducto().getPrecioUnitario()*
-			this.getPorcentajeADescontar();
+			this.getCoeficienteDescuento();
 		
 	}
 
-	private int getCantidadProductosAplicaParaItemVenta(IItemVenta itemVenta) {
+	public int getCantidadProductosAplicaParaItemVenta(IItemVenta itemVenta) {
+		if (!this.aplicaParaItemVenta(itemVenta))
+			throw new PromocionNoAplicaParaItemVenta();
 		return itemVenta.getCantidadProductos()-
 			(itemVenta.getCantidadProductos()%this.getCantidadProductosAplica());
 	}
@@ -42,12 +47,12 @@ public class Promocion {
 		this.cantidadProductosAplica = cantidadProductosAplica;
 	}
 
-	public double getPorcentajeADescontar() {
-		return porcentajeADescontar;
+	public double getCoeficienteDescuento() {
+		return coeficienteDescuento;
 	}
 
-	public void setPorcentajeADescontar(double porcentajeADescontar) {
-		this.porcentajeADescontar = porcentajeADescontar;
+	public void setCoeficienteDescuento(double coeficienteDescuento) {
+		this.coeficienteDescuento = coeficienteDescuento;
 	}
 
 	public boolean aplicaParaItemVenta(IItemVenta itemVenta) {
