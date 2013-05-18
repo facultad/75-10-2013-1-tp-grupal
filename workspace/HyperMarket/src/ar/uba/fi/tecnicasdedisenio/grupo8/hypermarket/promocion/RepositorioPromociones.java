@@ -11,7 +11,6 @@ public class RepositorioPromociones {
 	Collection<Promocion> promociones=new ArrayList<Promocion>();
 	
 	public void add(Promocion promocion) {
-		// TODO Auto-generated method stub
 		this.promociones.add(promocion);
 	}
 

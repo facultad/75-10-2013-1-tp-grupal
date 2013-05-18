@@ -6,7 +6,7 @@ public class CondicionSiempreVerdadera implements ICondicionPromocion {
 
 	@Override
 	public boolean valida(IItemVenta itemVenta) {
-		// TODO Auto-generated method stub
+		// Siempre devuelve verdadero
 		return true;
 	}
 
