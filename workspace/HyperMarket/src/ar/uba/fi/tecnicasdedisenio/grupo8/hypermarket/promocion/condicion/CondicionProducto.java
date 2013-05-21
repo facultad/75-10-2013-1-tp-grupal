@@ -1,4 +1,4 @@
-package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
+package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
@@ -7,7 +7,6 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 public class CondicionProducto extends CondicionItemVenta{
 
 	private IProducto producto;
-	private boolean _negada;
 
 	public CondicionProducto(IProducto producto) {
 		this.producto=producto;
@@ -21,14 +20,6 @@ public class CondicionProducto extends CondicionItemVenta{
 
 	private boolean evaluarCondicion(IItemVenta itemVenta) {
 		return this.producto.getId()==itemVenta.getProducto().getId();
-	}
-
-	public void negar() {
-		this._negada=(!this.negada());
-	}
-
-	private boolean negada() {
-		return this._negada;
 	}
 
 }

@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 
@@ -22,23 +22,23 @@ public class RepositorioPromocionesTest {
 		IProducto producto;
 		RepositorioPromociones repositorio=new RepositorioPromociones();
 
-		producto=new ProductoMock(1);
+		producto=new ProductoMock(1,10);
 		Promocion promocionQueAplica1=new Promocion(new CondicionProducto(producto), 1, 0.1);
 		repositorio.add(promocionQueAplica1);
 
-		producto=new ProductoMock(2);
+		producto=new ProductoMock(2,10);
 		Promocion promocionQueNoAplica1=new Promocion(new CondicionProducto(producto), 1, 0.2);
 		repositorio.add(promocionQueNoAplica1);
 
-		producto=new ProductoMock(3);
+		producto=new ProductoMock(3,10);
 		Promocion promocionQueNoAplica2=new Promocion(new CondicionProducto(producto), 1, 0.2);
 		repositorio.add(promocionQueNoAplica2);
 
-		producto=new ProductoMock(1);
+		producto=new ProductoMock(1,10);
 		Promocion promocionQueAplica2=new Promocion(new CondicionProducto(producto), 1, 0.2);
 		repositorio.add(promocionQueAplica2);
 
-		producto=new ProductoMock(4);
+		producto=new ProductoMock(4,10);
 		Promocion promocionQueNoAplica3=new Promocion(new CondicionProducto(producto), 1, 0.2);
 		repositorio.add(promocionQueNoAplica3);
 

@@ -6,10 +6,10 @@ import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 
@@ -26,7 +26,7 @@ public class ItemDescuentoTest {
 		repositorioPromociones.add(promocion);
 		
 		ItemDescuento itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(6,itemDescuento.getImporteDescuento(),0);
+		assertEquals(6,itemDescuento.calcularImporteDescuento(),0);
 	}
 	
 	@Test
@@ -46,31 +46,31 @@ public class ItemDescuentoTest {
 		
 		itemVenta=new ItemVentaMock(producto, 1);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(2,itemDescuento.getImporteDescuento(),0);
+		assertEquals(2,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 2);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(5,itemDescuento.getImporteDescuento(),0);
+		assertEquals(5,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 3);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(6,itemDescuento.getImporteDescuento(),0);
+		assertEquals(6,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 4);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(10,itemDescuento.getImporteDescuento(),0);
+		assertEquals(10,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 5);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(10,itemDescuento.getImporteDescuento(),0);
+		assertEquals(10,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 6);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(15,itemDescuento.getImporteDescuento(),0);
+		assertEquals(15,itemDescuento.calcularImporteDescuento(),0);
 
 		itemVenta=new ItemVentaMock(producto, 6);
 		itemDescuento=new ItemDescuento(itemVenta,repositorioPromociones);
-		assertEquals(15,itemDescuento.getImporteDescuento(),0);
+		assertEquals(15,itemDescuento.calcularImporteDescuento(),0);
 	}
 
 }

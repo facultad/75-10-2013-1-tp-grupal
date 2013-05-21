@@ -1,6 +1,8 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionSiempreVerdadera;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.PromocionNoAplicaParaItemVenta;
 
 public class Promocion {
@@ -15,11 +17,11 @@ public class Promocion {
 		this.setCoeficienteDescuento(coeficienteDescuento);
 	}
 
-	public ICondicionPromocion getCondicion() {
+	private ICondicionPromocion getCondicion() {
 		return condicion;
 	}
 
-	public void setCondicion(ICondicionPromocion condicion) {
+	private void setCondicion(ICondicionPromocion condicion) {
 		this.condicion = condicion;
 	}
 
@@ -43,20 +45,20 @@ public class Promocion {
 		return cantidadProductosAplica;
 	}
 
-	public void setCantidadProductosAplica(int cantidadProductosAplica) {
+	private void setCantidadProductosAplica(int cantidadProductosAplica) {
 		this.cantidadProductosAplica = cantidadProductosAplica;
 	}
 
-	public double getCoeficienteDescuento() {
+	private double getCoeficienteDescuento() {
 		return coeficienteDescuento;
 	}
 
-	public void setCoeficienteDescuento(double coeficienteDescuento) {
+	private void setCoeficienteDescuento(double coeficienteDescuento) {
 		this.coeficienteDescuento = coeficienteDescuento;
 	}
 
 	public boolean aplicaParaItemVenta(IItemVenta itemVenta) {
-		return this.condicion.valida(itemVenta);
+		return this.getCondicion().valida(itemVenta);
 	}
 
 	public static Promocion crearPromocionNoAplicable() {

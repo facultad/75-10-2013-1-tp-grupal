@@ -4,37 +4,47 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.ImporteDescuentoNoCalculado;
 
 public class ItemDescuento {
 
 	private IItemVenta itemVenta;
 	private RepositorioPromociones repositorioPromociones;
+	private double importeDescuentoVenta;
+	private boolean importeDescuentoVentaCalculado;
 
 	public ItemDescuento(IItemVenta itemVenta, RepositorioPromociones repositorioPromociones) {
 		this.setItemVenta(itemVenta);
 		this.setRepositorioPromociones(repositorioPromociones);
 	}
 
-	public IItemVenta getItemVenta() {
+	private IItemVenta getItemVenta() {
 		return itemVenta;
 	}
 
-	public void setItemVenta(IItemVenta itemVenta) {
+	private void setItemVenta(IItemVenta itemVenta) {
 		this.itemVenta = itemVenta;
 	}
 
-	public RepositorioPromociones getRepositorioPromociones() {
+	private RepositorioPromociones getRepositorioPromociones() {
 		return repositorioPromociones;
 	}
 
-	public void setRepositorioPromociones(RepositorioPromociones repositorioPromociones) {
+	private void setRepositorioPromociones(RepositorioPromociones repositorioPromociones) {
 		this.repositorioPromociones = repositorioPromociones;
 	}
 	
-	public double getImporteDescuento() {		
+	public double calcularImporteDescuento() {
 		Promocion promocionAAplicar = this.getPromocionAAplicar();
-		
-		return promocionAAplicar.getImporteADescontar(this.itemVenta);
+		this.importeDescuentoVenta=promocionAAplicar.getImporteADescontar(this.itemVenta);
+		this.importeDescuentoVentaCalculado=true;
+		return this.importeDescuentoVenta;
+	}
+
+	public double getImporteDescuento() {
+		if (!this.importeDescuentoVentaCalculado)
+			throw new ImporteDescuentoNoCalculado();
+		return this.importeDescuentoVenta;
 	}
 
 	private Promocion getPromocionAAplicar() {

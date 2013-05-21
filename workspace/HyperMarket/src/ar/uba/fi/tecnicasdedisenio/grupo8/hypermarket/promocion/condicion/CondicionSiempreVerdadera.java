@@ -1,8 +1,8 @@
-package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
+package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 
-public class CondicionSiempreVerdadera implements ICondicionPromocion {
+public class CondicionSiempreVerdadera extends BaseCondicionPromocion {
 
 	@Override
 	public boolean valida(IItemVenta itemVenta) {
