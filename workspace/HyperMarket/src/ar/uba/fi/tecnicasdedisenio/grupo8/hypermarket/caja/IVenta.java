@@ -8,4 +8,6 @@ public interface IVenta {
 
 	Iterator<IItemVenta> getItemsIterator();
 
+	boolean contieneProducto(IProducto producto);
+
 }

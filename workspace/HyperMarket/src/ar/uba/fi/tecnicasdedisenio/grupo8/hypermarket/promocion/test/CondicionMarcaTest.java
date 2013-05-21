@@ -36,7 +36,7 @@ public class CondicionMarcaTest {
 	public void noPasaCondicionNegada() {
 		IMarca marca=new MarcaMock(1);
 		IProducto producto=new ProductoMock(1,10,marca);
-		CondicionMarca condicion=new CondicionMarca(new MarcaMock(2));
+		CondicionMarca condicion=new CondicionMarca(marca);
 		condicion.negar();
 		IItemVenta itemVenta=new ItemVentaMock(producto,10);
 		assertFalse(condicion.valida(itemVenta));
@@ -46,9 +46,10 @@ public class CondicionMarcaTest {
 	public void pasaCondicionNegada() {
 		IMarca marca=new MarcaMock(1);
 		IProducto producto=new ProductoMock(1,10,marca);
-		CondicionMarca condicion=new CondicionMarca(new MarcaMock(1));
+		CondicionMarca condicion=new CondicionMarca(new MarcaMock(2));
 		condicion.negar();
 		IItemVenta itemVenta=new ItemVentaMock(producto,10);
-		assertTrue(condicion.valida(itemVenta));	}
+		assertTrue(condicion.valida(itemVenta));	
+	}
 
 }

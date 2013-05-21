@@ -14,4 +14,12 @@ public abstract class BaseCondicionPromocion implements ICondicionPromocion {
 		return this._negada;
 	}
 
+	public boolean valida(IItemVenta itemVenta) {
+		if (this.negada())
+			return !evaluarCondicion(itemVenta);	
+		return evaluarCondicion(itemVenta);
+	}
+
+	protected abstract boolean evaluarCondicion(IItemVenta itemVenta);
+	
 }

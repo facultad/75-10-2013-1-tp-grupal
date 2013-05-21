@@ -12,7 +12,7 @@ public class CondicionMarca extends CondicionItemVenta{
 	}
 
 	@Override
-	public boolean valida(IItemVenta itemVenta) {
+	protected boolean evaluarCondicion(IItemVenta itemVenta) {
 		return this.marca.getId()==itemVenta.getProducto().getMarca().getId();
 	}
 

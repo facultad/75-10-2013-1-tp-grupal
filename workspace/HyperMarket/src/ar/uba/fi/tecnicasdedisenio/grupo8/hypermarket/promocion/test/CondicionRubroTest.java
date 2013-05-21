@@ -36,7 +36,7 @@ public class CondicionRubroTest {
 	public void noPasaCondicionNegada() {
 		IRubro rubro=new RubroMock(1);
 		IProducto producto=new ProductoMock(1,10,rubro);
-		CondicionRubro condicion=new CondicionRubro(new RubroMock(2));
+		CondicionRubro condicion=new CondicionRubro(rubro);
 		condicion.negar();
 		IItemVenta itemVenta=new ItemVentaMock(producto,10);
 		assertFalse(condicion.valida(itemVenta));
@@ -46,7 +46,7 @@ public class CondicionRubroTest {
 	public void pasaCondicionNegada() {
 		IRubro rubro=new RubroMock(1);
 		IProducto producto=new ProductoMock(1,10,rubro);
-		CondicionRubro condicion=new CondicionRubro(new RubroMock(1));
+		CondicionRubro condicion=new CondicionRubro(new RubroMock(2));
 		condicion.negar();
 		IItemVenta itemVenta=new ItemVentaMock(producto,10);
 		assertTrue(condicion.valida(itemVenta));	}

@@ -12,7 +12,7 @@ public class CondicionRubro extends CondicionItemVenta {
 	}
 
 	@Override
-	public boolean valida(IItemVenta itemVenta) {
+	protected boolean evaluarCondicion(IItemVenta itemVenta) {
 		return this.rubro.getId()==itemVenta.getProducto().getRubro().getId();
 	}
 

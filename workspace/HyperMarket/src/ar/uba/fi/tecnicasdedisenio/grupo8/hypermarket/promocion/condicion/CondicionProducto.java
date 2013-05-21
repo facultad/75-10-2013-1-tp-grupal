@@ -12,13 +12,7 @@ public class CondicionProducto extends CondicionItemVenta{
 		this.producto=producto;
 	}
 
-	public boolean valida(IItemVenta itemVenta) {
-		if (this.negada())
-			return !evaluarCondicion(itemVenta);	
-		return evaluarCondicion(itemVenta);
-	}
-
-	private boolean evaluarCondicion(IItemVenta itemVenta) {
+	protected boolean evaluarCondicion(IItemVenta itemVenta) {
 		return this.producto.getId()==itemVenta.getProducto().getId();
 	}
 

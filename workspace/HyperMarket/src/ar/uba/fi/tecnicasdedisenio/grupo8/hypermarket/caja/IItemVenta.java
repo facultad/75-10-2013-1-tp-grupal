@@ -7,4 +7,8 @@ public interface IItemVenta {
 
 	int getCantidadProductos();
 
+	IVenta getVenta();
+
+	void setVenta(IVenta venta);
+
 }
