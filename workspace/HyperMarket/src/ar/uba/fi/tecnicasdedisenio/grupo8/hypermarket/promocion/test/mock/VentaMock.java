@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 
 public class VentaMock implements IVenta {
@@ -21,17 +20,6 @@ public class VentaMock implements IVenta {
 	@Override
 	public Iterator<IItemVenta> getItemsIterator() {
 		return this.items.iterator();
-	}
-
-	@Override
-	public boolean contieneProducto(IProducto producto) {
-		Iterator<IItemVenta> iterItemVenta=this.items.iterator();
-		while (iterItemVenta.hasNext()){
-			IItemVenta itemVenta=iterItemVenta.next();
-			if (itemVenta.getProducto().getId()==producto.getId())
-				return true;
-		}
-		return false;
 	}
 
 }

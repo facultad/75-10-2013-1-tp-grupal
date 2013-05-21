@@ -35,7 +35,7 @@ public class ItemDescuento {
 	}
 	
 	public double calcularImporteDescuento() {
-		Promocion promocionAAplicar = this.getPromocionAAplicar();
+		IPromocion promocionAAplicar = this.getIPromocionAAplicar();
 		this.importeDescuentoVenta=promocionAAplicar.getImporteADescontar(this.itemVenta);
 		this.importeDescuentoVentaCalculado=true;
 		return this.importeDescuentoVenta;
@@ -47,17 +47,17 @@ public class ItemDescuento {
 		return this.importeDescuentoVenta;
 	}
 
-	private Promocion getPromocionAAplicar() {
-		Collection<Promocion> promocionesAplicaItem=
+	private IPromocion getIPromocionAAplicar() {
+		Collection<IPromocion> promocionesAplicaItem=
 				this.repositorioPromociones.getPromocionesAplicaItemVenta(this.itemVenta);
 		
-		Iterator<Promocion> iterPromocion;
-		iterPromocion=promocionesAplicaItem.iterator();
+		Iterator<IPromocion> iterIPromocion;
+		iterIPromocion=promocionesAplicaItem.iterator();
 
-		Promocion promocionAAplicar=Promocion.crearPromocionNoAplicable();
+		IPromocion promocionAAplicar=Promocion.crearPromocionNoAplicable();
 		
-		while(iterPromocion.hasNext()){
-			Promocion promocion=iterPromocion.next();
+		while(iterIPromocion.hasNext()){
+			IPromocion promocion=iterIPromocion.next();
 			if (promocion.getImporteADescontar(this.itemVenta)>=
 				promocionAAplicar.getImporteADescontar(this.itemVenta))
 				promocionAAplicar=promocion;

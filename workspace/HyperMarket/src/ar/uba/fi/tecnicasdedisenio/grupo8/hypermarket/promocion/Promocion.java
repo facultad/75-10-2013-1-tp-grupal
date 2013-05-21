@@ -5,7 +5,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.Condic
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.PromocionNoAplicaParaItemVenta;
 
-public class Promocion {
+public class Promocion implements IPromocion{
 
 	private ICondicionPromocion condicion;
 	private int cantidadProductosAplica;
@@ -25,6 +25,7 @@ public class Promocion {
 		this.condicion = condicion;
 	}
 
+	@Override
 	public double getImporteADescontar(IItemVenta itemVenta) {
 		if (!this.aplicaParaItemVenta(itemVenta))
 			throw new PromocionNoAplicaParaItemVenta();
@@ -34,6 +35,7 @@ public class Promocion {
 		
 	}
 
+	@Override
 	public int getCantidadProductosAplicaParaItemVenta(IItemVenta itemVenta) {
 		if (!this.aplicaParaItemVenta(itemVenta))
 			throw new PromocionNoAplicaParaItemVenta();

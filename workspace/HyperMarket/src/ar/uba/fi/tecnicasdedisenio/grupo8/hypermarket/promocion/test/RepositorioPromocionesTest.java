@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
@@ -45,7 +46,7 @@ public class RepositorioPromocionesTest {
 		producto=new ProductoMock(1, 10);
 		IItemVenta itemVenta=new ItemVentaMock(producto, 10);
 		
-		Collection<Promocion> promocionesQueAplican=repositorio.getPromocionesAplicaItemVenta(itemVenta);
+		Collection<IPromocion> promocionesQueAplican=repositorio.getPromocionesAplicaItemVenta(itemVenta);
 		assertTrue(promocionesQueAplican.contains(promocionQueAplica1));
 		assertTrue(promocionesQueAplican.contains(promocionQueAplica2));
 		assertFalse(promocionesQueAplican.contains(promocionQueNoAplica1));

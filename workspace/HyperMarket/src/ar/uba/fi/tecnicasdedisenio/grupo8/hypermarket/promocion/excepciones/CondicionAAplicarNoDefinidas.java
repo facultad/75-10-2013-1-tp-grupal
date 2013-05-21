@@ -1,5 +1,5 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones;
 
-public class DependenciasCondicionNoDefinidas extends RuntimeException {
+public class CondicionAAplicarNoDefinidas extends RuntimeException {
 
 }

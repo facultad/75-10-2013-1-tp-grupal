@@ -14,9 +14,9 @@ public class RepositorioPromociones {
 		this.promociones.add(promocion);
 	}
 
-	public Collection<Promocion> getPromocionesAplicaItemVenta(
+	public Collection<IPromocion> getPromocionesAplicaItemVenta(
 			IItemVenta itemVenta) {
-		Collection<Promocion> promocionesAplicaItenVenta=new ArrayList<Promocion>();
+		Collection<IPromocion> promocionesAplicaItenVenta=new ArrayList<IPromocion>();
 		Iterator<Promocion> iterPromocion=this.promociones.iterator();
 		while (iterPromocion.hasNext()){
 			Promocion promocion=iterPromocion.next();
