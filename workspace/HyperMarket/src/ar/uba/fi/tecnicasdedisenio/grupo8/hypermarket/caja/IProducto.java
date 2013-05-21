@@ -6,4 +6,6 @@ public interface IProducto extends Identificable{
 	
 	IRubro getRubro();
 
+	IMarca getMarca();
+
 }
