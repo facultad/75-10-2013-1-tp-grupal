@@ -6,12 +6,15 @@ import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDependiente;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.PromocionNoAplicaParaItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.VentaMock;
 
 public class PromocionTest {
 
@@ -163,6 +166,35 @@ public class PromocionTest {
 
 		itemVenta=new ItemVentaMock(producto, 89);
 		assertEquals(81,promocion.getCantidadProductosAplicaParaItemVenta(itemVenta),0);
+	}
+	
+	@Test
+	public void testPromocionDependiente(){
+		
+		IProducto producto1=new ProductoMock(1,10);
+		IProducto producto2=new ProductoMock(2,20);
+		IProducto producto3=new ProductoMock(3,30);
+		
+		ICondicionPromocion condicionDeDependencia=new CondicionProducto(producto1);
+		ICondicionPromocion condicionDependiente=new CondicionDependiente(condicionDeDependencia);
+		Promocion promocion=new Promocion(condicionDependiente, 1, 0.1);
+
+		IVenta venta=new VentaMock();
+		IItemVenta itemVenta1=new ItemVentaMock(producto1, 1);
+		IItemVenta itemVenta2=new ItemVentaMock(producto2, 2);
+		IItemVenta itemVenta3=new ItemVentaMock(producto3, 3);
+		venta.addItem(itemVenta1);
+		venta.addItem(itemVenta2);
+		venta.addItem(itemVenta3);
+		
+		try {
+			promocion.getImporteADescontar(itemVenta1);
+			fail();
+		} catch (PromocionNoAplicaParaItemVenta e) {
+			// Paso el test ya que la promoción no aplica para el item pasado.
+		}
+		assertEquals(4,promocion.getImporteADescontar(itemVenta2),0);
+		assertEquals(9,promocion.getImporteADescontar(itemVenta3),0);
 	}
 
 }
