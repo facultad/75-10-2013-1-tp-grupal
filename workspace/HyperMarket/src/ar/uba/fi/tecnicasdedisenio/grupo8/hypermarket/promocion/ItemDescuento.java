@@ -18,7 +18,7 @@ public class ItemDescuento {
 		this.setRepositorioPromociones(repositorioPromociones);
 	}
 
-	private IItemVenta getItemVenta() {
+	public IItemVenta getItemVenta() {
 		return itemVenta;
 	}
 
