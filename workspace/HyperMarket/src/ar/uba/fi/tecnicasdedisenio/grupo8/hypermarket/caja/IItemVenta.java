@@ -1,5 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
+
 
 public interface IItemVenta {
 
@@ -7,7 +9,7 @@ public interface IItemVenta {
 
 	int getCantidadProductos();
 
-	IVenta getVenta();
+	IVenta getVenta() throws ItemVentaNoEstaAsociadoANingunaVenta;
 
 	void setVenta(IVenta venta);
 

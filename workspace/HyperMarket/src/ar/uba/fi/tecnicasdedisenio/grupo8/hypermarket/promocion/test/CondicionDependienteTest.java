@@ -7,10 +7,12 @@ import org.junit.Test;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDependiente;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.ProductoNoPuedeDependerDeSiMismoException;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.PromocionNoAplicaParaItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.VentaMock;
@@ -138,4 +140,21 @@ public class CondicionDependienteTest {
 		assertTrue(condicionDependiente.valida(itemVenta3));
 	}
 
+	@Test
+	public void testCondicionDependienteNecesitaConexionConVenta(){
+		
+		IProducto producto=new ProductoMock(1,10);
+		
+		ICondicionPromocion condicionDeDependencia=new CondicionProducto(producto);
+		ICondicionPromocion condicionDependiente=new CondicionDependiente(condicionDeDependencia);
+
+		IItemVenta itemVenta=new ItemVentaMock(producto, 1);
+		
+		try {
+			condicionDependiente.valida(itemVenta);
+			fail();
+		} catch (ItemVentaNoEstaAsociadoANingunaVenta e) {
+			// Paso el test
+		}
+	}
 }

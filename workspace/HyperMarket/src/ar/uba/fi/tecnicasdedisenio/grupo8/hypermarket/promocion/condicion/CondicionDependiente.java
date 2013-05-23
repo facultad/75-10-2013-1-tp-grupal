@@ -7,6 +7,7 @@ import java.util.Iterator;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.CondicionAAplicarNoDefinidas;
 
 public class CondicionDependiente extends CondicionItemVenta {
@@ -20,6 +21,8 @@ public class CondicionDependiente extends CondicionItemVenta {
 	@Override
 	protected boolean evaluarCondicion(IItemVenta itemVenta) {
 		IVenta venta=itemVenta.getVenta();
+		if (venta==null)
+			throw new ItemVentaNoEstaAsociadoANingunaVenta();
 		Iterator<IItemVenta> iterItemVenta=venta.getItemsIterator();
 		while (iterItemVenta.hasNext()){
 			IItemVenta itemVentaIterado=iterItemVenta.next();
