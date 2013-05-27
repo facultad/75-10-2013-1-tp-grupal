@@ -7,5 +7,7 @@ public interface IVenta {
 	void addItem(IItemVenta itemVenta);
 
 	Iterator<IItemVenta> getItemsIterator();
+	public void imprimeItems();
+	public int getCantidadUnidades();
 
 }
