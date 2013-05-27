@@ -8,18 +8,21 @@ public class Marca implements IMarca{
 		this.setNombre(nombre);
 		this.setId(cuit);
 	}
-
 	
-	private void setNombre(String nombre){
-		this.nombre = nombre;
-	}
 	private void setId(long cuit){
 		this.Id = cuit;
+	}
+
+	private void setNombre(String nombre){
+		this.nombre = nombre;
 	}
 	
 	@Override
 	public long getId() {
 		return this.Id;
 	}
-
+	
+	public String getNombre() {
+		return this.nombre;
+	}
 }

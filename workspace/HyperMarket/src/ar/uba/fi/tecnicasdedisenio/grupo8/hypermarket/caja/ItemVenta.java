@@ -1,31 +1,43 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
-
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 
 public class ItemVenta implements IItemVenta{
-
+	private IProducto producto;
+	private int cantidad;
+	private IVenta venta;
+	
+	public ItemVenta(IProducto producto, int cantidad) {
+		this.producto=producto;
+		this.cantidad=cantidad;
+		this.venta=null;
+	}
+	
+	public ItemVenta(IProducto producto, int cantidad, IVenta venta) {
+		this.producto=producto;
+		this.cantidad=cantidad;
+		this.venta=venta;
+	}
+	
 	@Override
 	public IProducto getProducto() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.producto;
 	}
 
 	@Override
 	public int getCantidadProductos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.cantidad;
 	}
 
 	@Override
 	public IVenta getVenta() throws ItemVentaNoEstaAsociadoANingunaVenta {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.venta==null)
+			throw new ItemVentaNoEstaAsociadoANingunaVenta();
+		else return this.venta;
 	}
 
 	@Override
 	public void setVenta(IVenta venta) {
-		// TODO Auto-generated method stub
-		
+		this.venta=venta;
 	}
 
 }

@@ -1,6 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class Venta implements IVenta{
@@ -9,6 +10,7 @@ public class Venta implements IVenta{
 	@Override
 	public void addItem(IItemVenta itemVenta) {
 		this.listaItems.add(itemVenta);
+		itemVenta.setVenta(this);
 		
 	}
 
@@ -24,4 +26,5 @@ public class Venta implements IVenta{
 			System.out.print(element);
 		}
 	}
+
 }
