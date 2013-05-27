@@ -6,11 +6,12 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class VentaMock implements IVenta {
 
 	Collection<IItemVenta> items=new ArrayList<IItemVenta>();
-	
+
 	@Override
 	public void addItem(IItemVenta itemVenta) {
 		this.items.add(itemVenta);
@@ -29,6 +30,16 @@ public class VentaMock implements IVenta {
 
 	@Override
 	public int getCantidadUnidades() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getImporteTotalConDescuento(RepositorioPromociones promociones) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getImporteTotal() {
 		throw new UnsupportedOperationException();
 	}
 

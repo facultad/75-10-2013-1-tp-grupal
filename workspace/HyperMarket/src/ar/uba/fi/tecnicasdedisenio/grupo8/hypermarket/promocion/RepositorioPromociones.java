@@ -8,18 +8,18 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 
 public class RepositorioPromociones {
 
-	Collection<Promocion> promociones=new ArrayList<Promocion>();
+	Collection<IPromocion> promociones=new ArrayList<IPromocion>();
 	
-	public void add(Promocion promocion) {
+	public void add(IPromocion promocion) {
 		this.promociones.add(promocion);
 	}
 
 	public Collection<IPromocion> getPromocionesAplicaItemVenta(
 			IItemVenta itemVenta) {
 		Collection<IPromocion> promocionesAplicaItenVenta=new ArrayList<IPromocion>();
-		Iterator<Promocion> iterPromocion=this.promociones.iterator();
+		Iterator<IPromocion> iterPromocion=this.promociones.iterator();
 		while (iterPromocion.hasNext()){
-			Promocion promocion=iterPromocion.next();
+			IPromocion promocion=iterPromocion.next();
 			if (promocion.aplicaParaItemVenta(itemVenta))
 				promocionesAplicaItenVenta.add(promocion);
 		}

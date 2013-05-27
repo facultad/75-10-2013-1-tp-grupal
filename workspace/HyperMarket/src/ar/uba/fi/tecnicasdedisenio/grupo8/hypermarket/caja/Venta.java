@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.DescuentoVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
+
 public class Venta implements IVenta{
 	private ArrayList<IItemVenta> listaItems;
 	private ISucursal sucursal;
 	private IMedioPago mediopago;
+	private Double importeTotalConDescuentoVenta=null;
 	
 	public Venta(ISucursal sucu, IMedioPago mpago){
 		this.listaItems = new ArrayList<IItemVenta>();
@@ -52,5 +56,19 @@ public class Venta implements IVenta{
 		return this.listaItems.iterator();
 	}
 
+	@Override
+	public double getImporteTotalConDescuento(RepositorioPromociones promociones) {
+		if (this.importeTotalConDescuentoVenta==null){ 
+			DescuentoVenta descuentoVenta=new DescuentoVenta(this, promociones);
+			this.importeTotalConDescuentoVenta=
+				new Double(getImporteTotal()-descuentoVenta.getImporteDescuento());
+		}
+		return this.importeTotalConDescuentoVenta.doubleValue();
+	}
+
+	@Override
+	public double getImporteTotal() {
+		throw new UnsupportedOperationException();
+	}
 	
 }
