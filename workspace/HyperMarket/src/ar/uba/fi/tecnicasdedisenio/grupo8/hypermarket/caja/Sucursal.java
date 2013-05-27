@@ -1,6 +1,6 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
-public class Sucursal {
+public class Sucursal implements ISucursal{
 
 	private long id;
 

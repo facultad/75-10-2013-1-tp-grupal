@@ -5,18 +5,22 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class Venta implements IVenta{
-	private ArrayList<IItemVenta> listaItems = new ArrayList();
+	private ArrayList<IItemVenta> listaItems;
+	private ISucursal sucursal;
+	private IMedioPago mediopago;
 	
-	@Override
-	public void addItem(IItemVenta itemVenta) {
-		this.listaItems.add(itemVenta);
-		itemVenta.setVenta(this);
-		
+	public Venta(ISucursal sucu, IMedioPago mpago){
+		this.listaItems = new ArrayList<IItemVenta>();
+		this.sucursal=sucu;
+		this.mediopago=mpago;
 	}
-
-	@Override
-	public Iterator<IItemVenta> getItemsIterator() {
-		return this.listaItems.iterator();
+	
+	public ISucursal getSucursal(){
+		return this.sucursal;
+	}
+	
+	public IMedioPago getPago(){
+		return this.mediopago;
 	}
 
 	public void imprimeItems(){
@@ -27,4 +31,26 @@ public class Venta implements IVenta{
 		}
 	}
 
+	public int getCantidadUnidades(){
+		int cant = 0;
+		Iterator<IItemVenta> itr=this.getItemsIterator();
+		while (itr.hasNext()){
+			IItemVenta item = itr.next();
+			cant = cant + item.getCantidadProductos();
+		}
+	return cant;
+	}
+		
+	@Override
+	public void addItem(IItemVenta itemVenta) {
+		this.listaItems.add(itemVenta);
+		itemVenta.setVenta(this);
+	}
+
+	@Override
+	public Iterator<IItemVenta> getItemsIterator() {
+		return this.listaItems.iterator();
+	}
+
+	
 }
