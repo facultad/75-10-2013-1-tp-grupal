@@ -22,4 +22,14 @@ public class VentaMock implements IVenta {
 		return this.items.iterator();
 	}
 
+	@Override
+	public void imprimeItems() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getCantidadUnidades() {
+		throw new UnsupportedOperationException();
+	}
+
 }
