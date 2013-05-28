@@ -54,4 +54,9 @@ public class VentaMock implements IVenta {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public long getId() {
+		throw new UnsupportedOperationException();
+	}
+
 }

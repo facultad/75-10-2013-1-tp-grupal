@@ -5,8 +5,8 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ProductoS
 public class Producto implements IProducto{
 
 	private double importe;
-	private IRubro rubro;
-	private IMarca marca;
+	private IRubro rubro=Rubro.getRubroNoDefinido();
+	private IMarca marca=Marca.getMarcaNoDefinida();
 	private long id = IdGenerator.getInstance().getNewId();
 
 	public Producto(double importe) {

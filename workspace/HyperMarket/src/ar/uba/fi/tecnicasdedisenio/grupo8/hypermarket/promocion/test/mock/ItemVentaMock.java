@@ -40,4 +40,9 @@ public class ItemVentaMock implements IItemVenta{
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public long getId() {
+		throw new UnsupportedOperationException();
+	}
+
 }

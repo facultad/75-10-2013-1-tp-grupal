@@ -2,6 +2,7 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class Rubro implements IRubro{
 
+	private static IRubro rubroNoDefinido=new Rubro("No definido");
 	private String nombre;
 	private long id = IdGenerator.getInstance().getNewId();
 	
@@ -16,6 +17,10 @@ public class Rubro implements IRubro{
 
 	public String getNombre() {
 		return this.nombre;
+	}
+
+	public static IRubro getRubroNoDefinido() {
+		return Rubro.rubroNoDefinido;
 	}
 
 }
