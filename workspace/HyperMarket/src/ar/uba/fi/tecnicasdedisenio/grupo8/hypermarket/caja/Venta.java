@@ -1,7 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.DescuentoVenta;
@@ -69,6 +69,11 @@ public class Venta implements IVenta{
 	@Override
 	public double getImporteTotal() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Date getFechaVenta() {
+		return new Date();
 	}
 	
 }

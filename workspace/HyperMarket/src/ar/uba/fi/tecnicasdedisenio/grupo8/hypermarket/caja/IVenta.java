@@ -1,5 +1,6 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
+import java.util.Date;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
@@ -16,4 +17,6 @@ public interface IVenta {
 
 	double getImporteTotal();
 
+	Date getFechaVenta();
+	
 }
