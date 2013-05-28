@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
-public interface IVenta {
+public interface IVenta extends Identificable{
 
 	void addItem(IItemVenta itemVenta);
 

@@ -1,16 +1,11 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
-public class Marca implements IMarca{
+public class Marca implements IMarca {
 	private String nombre;
-	private long Id;
+	private long id = IdGenerator.getInstance().getNewId();
 	
-	public Marca(String nombre, long id){
+	public Marca(String nombre){
 		this.setNombre(nombre);
-		this.setId(id);
-	}
-	
-	private void setId(long id){
-		this.Id = id;
 	}
 
 	private void setNombre(String nombre){
@@ -19,7 +14,7 @@ public class Marca implements IMarca{
 	
 	@Override
 	public long getId() {
-		return this.Id;
+		return this.id;
 	}
 	
 	public String getNombre() {

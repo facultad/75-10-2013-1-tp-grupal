@@ -8,9 +8,12 @@ public class IdGeneratorTest {
 
 	@Test
 	public void testGeneradorID() {
-		Id id1 = new Id();
-		Id id2 = new Id();
+		long id1 = IdGenerator.getInstance().getNewId();
+		long id2 = IdGenerator.getInstance().getNewId();
+		long id3 = IdGenerator.getInstance().getNewId();
 		assertFalse(id1==id2);
+		assertFalse(id1==id3);
+		assertFalse(id2==id3);
 		assertEquals(id1,id1);
 	}
 	

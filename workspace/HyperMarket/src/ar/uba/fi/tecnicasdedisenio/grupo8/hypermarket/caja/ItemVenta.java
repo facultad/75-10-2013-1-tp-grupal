@@ -5,6 +5,7 @@ public class ItemVenta implements IItemVenta{
 	private IProducto producto;
 	private int cantidad;
 	private IVenta venta;
+	private long id = IdGenerator.getInstance().getNewId();
 	
 	public ItemVenta(IProducto producto, int cantidad) {
 		this.producto=producto;
@@ -36,13 +37,18 @@ public class ItemVenta implements IItemVenta{
 	}
 
 	@Override
-	public void setVenta(IVenta venta) {
-		this.venta=venta;
+	public double getImporteSinDescuento() {
+		return this.cantidad*this.producto.getPrecioUnitario();
 	}
 
 	@Override
-	public double getImporteSinDescuento() {
-		return this.cantidad*this.producto.getPrecioUnitario();
+	public long getId() {
+		return this.id;
+	}
+
+	@Override
+	public void setVenta(IVenta venta) {
+		this.venta=venta;
 	}
 
 }

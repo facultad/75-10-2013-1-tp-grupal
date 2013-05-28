@@ -2,15 +2,10 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class Rubro implements IRubro{
 
-	private long id;
 	private String nombre;
+	private long id = IdGenerator.getInstance().getNewId();
 	
-	public Rubro(long id) {
-		this.id=id;
-	}
-
-	public Rubro(String nombre,long id) {
-		this.id=id;
+	public Rubro(String nombre) {
 		this.nombre=nombre;
 	}
 	
