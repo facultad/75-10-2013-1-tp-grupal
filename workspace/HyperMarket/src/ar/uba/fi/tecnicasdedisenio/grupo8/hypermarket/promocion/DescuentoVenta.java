@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.ImporteDescuentoNoCalculado;
 
 public class DescuentoVenta {
 

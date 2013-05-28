@@ -9,8 +9,6 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.MedioPago;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionSucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.MedioPagoMock;

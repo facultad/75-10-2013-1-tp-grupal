@@ -1,14 +1,10 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.CondicionAAplicarNoDefinidas;
 
 public class CondicionDependiente extends CondicionItemVenta {
 
@@ -26,7 +22,7 @@ public class CondicionDependiente extends CondicionItemVenta {
 		Iterator<IItemVenta> iterItemVenta=venta.getItemsIterator();
 		while (iterItemVenta.hasNext()){
 			IItemVenta itemVentaIterado=iterItemVenta.next();
-			// Una condición dependiente solo se verifica en el resto de los items.
+			// Una condiciÃ³n dependiente solo se verifica en el resto de los items.
 			if (itemVentaIterado==itemVenta)
 				continue;
 			if (this.condicionAAplicar.valida(itemVentaIterado))

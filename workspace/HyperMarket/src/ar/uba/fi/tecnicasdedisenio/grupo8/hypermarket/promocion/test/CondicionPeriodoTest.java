@@ -6,9 +6,6 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionPeriodo;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
@@ -18,11 +15,14 @@ public class CondicionPeriodoTest {
 
 	@Test
 	public void testFechaEnPeriodoPromocion() {
+		@SuppressWarnings("deprecation")
 		Date desde = new Date(2012,01,1);
+		@SuppressWarnings("deprecation")
 		Date hasta = new Date(2013,01,1);
 		
 		CondicionPeriodo condicion = new CondicionPeriodo(desde, hasta);
 		
+		@SuppressWarnings("deprecation")
 		Date fecha = new Date(2012,05,15);		
 		VentaMock venta = new VentaMock();
 		venta.setFechaVenta(fecha);
@@ -35,11 +35,14 @@ public class CondicionPeriodoTest {
 
 	@Test
 	public void testFechaFueraDePeriodoPromocion() {
+		@SuppressWarnings("deprecation")
 		Date desde = new Date(2012,01,1);
+		@SuppressWarnings("deprecation")
 		Date hasta = new Date(2013,01,1);
 		
 		CondicionPeriodo condicion = new CondicionPeriodo(desde, hasta);
 		
+		@SuppressWarnings("deprecation")
 		Date fecha = new Date(2010,05,15);		
 		VentaMock venta = new VentaMock();
 		venta.setFechaVenta(fecha);
@@ -52,11 +55,13 @@ public class CondicionPeriodoTest {
 	
 	@Test
 	public void testFechaEnPromocion() {
+		@SuppressWarnings("deprecation")
 		Date hasta = new Date(2013,01,1);
 		
 		CondicionPeriodo condicion = new CondicionPeriodo(hasta);
 		
-		Date fecha = new Date(2012,05,15);		
+		@SuppressWarnings("deprecation")
+		Date fecha = new Date(2012,05,15);
 		VentaMock venta = new VentaMock();
 		venta.setFechaVenta(fecha);
 		
@@ -69,7 +74,7 @@ public class CondicionPeriodoTest {
 	@Test
 	public void testPromocionInvalida() {
 		try {
-			CondicionPeriodo condicion = new CondicionPeriodo(null);	
+			new CondicionPeriodo(null);	
 			assertTrue(false);
 		} catch (NullPointerException e) {
 			assertTrue(true);
@@ -79,9 +84,12 @@ public class CondicionPeriodoTest {
 	@Test
 	public void testFechaPromocionMalDefinida() {
 		try {
+			@SuppressWarnings("deprecation")
 			Date hasta = new Date(2012,01,1);
+			@SuppressWarnings("deprecation")
 			Date desde = new Date(2013,01,1);			
-			CondicionPeriodo condicion = new CondicionPeriodo(desde,hasta);	
+			
+			new CondicionPeriodo(desde,hasta);	
 			assertTrue(false);
 		} catch (IllegalArgumentException e) {
 			assertTrue(true);

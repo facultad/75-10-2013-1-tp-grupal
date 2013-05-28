@@ -1,9 +1,5 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test;
 
-import static org.junit.Assert.*;
-
-import java.sql.Date;
-
 import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IEntidadFinanciera;

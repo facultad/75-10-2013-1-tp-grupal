@@ -86,7 +86,8 @@ public class AceptacionTest {
 	private ICondicionPromocion crearCondicionDiaJuevesYMedioPagoTarjetaXYZ() {
 		throw new UnsupportedOperationException();
 	}
-
+	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAceptacion2() {
 		/*

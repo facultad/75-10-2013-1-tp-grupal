@@ -9,7 +9,6 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ISucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class VentaMock implements IVenta {
@@ -17,6 +16,7 @@ public class VentaMock implements IVenta {
 	Collection<IItemVenta> items=new ArrayList<IItemVenta>();
 	private Date date;
 	private IMedioPago medioPago;
+	private ISucursal sucursal;
 
 	public VentaMock() {
 		// TODO Auto-generated constructor stub
@@ -27,6 +27,11 @@ public class VentaMock implements IVenta {
 	}
 	
 	
+	public VentaMock(ISucursal sucursal, IMedioPago medioPago) {
+		this.medioPago = medioPago;
+		this.sucursal = sucursal;
+	}
+
 	@Override
 	public void addItem(IItemVenta itemVenta) {
 		this.items.add(itemVenta);
@@ -81,8 +86,11 @@ public class VentaMock implements IVenta {
 	}
 	
 	public ISucursal getSucursal(){
-		return new Sucursal("Bernal");
+		if (this.sucursal == null) this.sucursal = new SucursalMock(1);
+		return this.sucursal;
 	}
+	
+
 	
 
 }

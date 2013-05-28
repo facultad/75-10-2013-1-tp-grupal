@@ -1,6 +1,5 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock;
 
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.EntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IEntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 
