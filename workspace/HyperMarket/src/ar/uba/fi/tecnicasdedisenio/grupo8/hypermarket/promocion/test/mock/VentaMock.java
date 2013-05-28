@@ -74,11 +74,6 @@ public class VentaMock implements IVenta {
 
 	@Override
 	public long getId() {
-		return 0;
-	}
-
-	@Override
-	public long getId() {
 		throw new UnsupportedOperationException();
 	}
 
