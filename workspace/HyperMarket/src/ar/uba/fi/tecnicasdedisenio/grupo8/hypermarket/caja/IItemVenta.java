@@ -3,7 +3,7 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 
 
-public interface IItemVenta {
+public interface IItemVenta extends Identificable{
 
 	IProducto getProducto();
 

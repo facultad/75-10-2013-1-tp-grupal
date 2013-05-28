@@ -13,11 +13,13 @@ public class Venta implements IVenta{
 	private IMedioPago mediopago;
 	private Double importeTotalConDescuentoVenta=null;
 	private Date fechaVenta=new Date();
+	private long id = IdGenerator.getInstance().getNewId();
 	
 	public Venta(ISucursal sucu, IMedioPago mpago){
 		this.listaItems = new ArrayList<IItemVenta>();
 		this.sucursal=sucu;
 		this.mediopago=mpago;
+		this.id= IdGenerator.getInstance().getNewId();
 	}
 	
 	public ISucursal getSucursal(){
@@ -83,6 +85,11 @@ public class Venta implements IVenta{
 	
 	public void setFechaVenta(Date fechaVenta) {
 		this.fechaVenta=fechaVenta;
+	}
+
+	@Override
+	public long getId() {
+		return this.id;
 	}
 
 }

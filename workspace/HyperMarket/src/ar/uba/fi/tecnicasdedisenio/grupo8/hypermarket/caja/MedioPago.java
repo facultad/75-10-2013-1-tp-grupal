@@ -1,12 +1,13 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class MedioPago implements IMedioPago{
-	private long id;
+	private long id = IdGenerator.getInstance().getNewId();
+	private String descripcion;
 	
 	IEntidadFinanciera entidadFinanciera;
 	
-	public MedioPago (long id){
-		this.id=id;
+	public MedioPago (String desc){
+		this.descripcion=desc;
 	}
 	
 	@Override
@@ -25,6 +26,11 @@ public class MedioPago implements IMedioPago{
 	@Override
 	public boolean hasEntidadFinanciera() {
 		return (entidadFinanciera != null);
+	}
+
+	@Override
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
 }
