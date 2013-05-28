@@ -8,14 +8,18 @@ public class MedioPagoMock implements IMedioPago{
 
 	private IEntidadFinanciera entidadFinanciera;
 
+	long id;
+	public MedioPagoMock(long id) {
+		this.id = id;
+	}
+	
 	public MedioPagoMock(IEntidadFinanciera entidadFinanciera) {
 		this.entidadFinanciera = entidadFinanciera;
 	}
 
 	@Override
 	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
 	@Override

@@ -5,13 +5,15 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 
 public class CondicionMedioPago extends CondicionVenta {
 
-	public CondicionMedioPago(IMedioPago medioPago) {
-		throw new UnsupportedOperationException(); 
+	IMedioPago medioPagoCond;
+	
+	public CondicionMedioPago(IMedioPago medio){
+		medioPagoCond = medio;
 	}
-
+	
 	@Override
 	protected boolean evaluarCondicion(IItemVenta itemVenta) {
-		throw new UnsupportedOperationException();
+		return medioPagoCond.getId() == itemVenta.getVenta().getPago().getId();
 	}
-
+	
 }

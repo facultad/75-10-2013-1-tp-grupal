@@ -23,4 +23,5 @@ public interface IVenta extends Identificable{
 	
 	public IMedioPago getPago();
 	
+	ISucursal getSucursal();
 }

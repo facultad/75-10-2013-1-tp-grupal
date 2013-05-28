@@ -7,7 +7,9 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ISucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class VentaMock implements IVenta {
@@ -69,6 +71,7 @@ public class VentaMock implements IVenta {
 
 	@Override
 	public IMedioPago getPago() {
+		if (medioPago == null) medioPago = new MedioPagoMock(1);
 		return medioPago;
 	}
 
@@ -76,10 +79,10 @@ public class VentaMock implements IVenta {
 	public long getId() {
 		return 0;
 	}
-
-	@Override
-	public long getId() {
-		throw new UnsupportedOperationException();
+	
+	public ISucursal getSucursal(){
+		return new Sucursal("Bernal");
 	}
+	
 
 }
