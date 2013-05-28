@@ -28,4 +28,9 @@ public class MedioPagoMock implements IMedioPago{
 		return this.entidadFinanciera != null;
 	}
 
+	@Override
+	public String getDescripcion() {
+		return null;
+	}
+
 }

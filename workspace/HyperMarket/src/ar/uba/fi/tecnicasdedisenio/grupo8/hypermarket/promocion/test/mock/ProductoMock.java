@@ -33,6 +33,13 @@ public class ProductoMock implements IProducto {
 		this.marca=marca;
 	}
 
+	public ProductoMock(int i, int j, IRubro rubro,IMarca marca) {
+		this.setId(id);
+		this.setImporte(importe);
+		this.marca=marca;
+		this.rubro=rubro;
+	}
+
 	private void setImporte(double importe) {
 		this.importe=importe;
 	}

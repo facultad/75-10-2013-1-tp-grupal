@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMarca;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IRubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Marca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
@@ -13,27 +17,31 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.Condic
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionOR;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionRubro;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.MarcaMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.RubroMock;
 
 public class CondicionCompuestaTest {
 
 	@Test
 	public void testANDTwoConditionsFail() {
-		Marca marca1 = new Marca("Marca1", 30123456784L);
+		IMarca marca1 = new MarcaMock(30123456784L);
 		CondicionMarca cm1 = new CondicionMarca(marca1);
-		CondicionMarca cm2 = new CondicionMarca(new Marca("Marca2", 20123456784L));
+		CondicionMarca cm2 = new CondicionMarca(new MarcaMock(20123456784L));
 
 		CondicionAND andCondition = new CondicionAND();
 		andCondition.agregarCondicion(cm1);
 		andCondition.agregarCondicion(cm2);
 				
-		Producto producto = new Producto(1, 100, marca1);
+		IProducto producto = new ProductoMock(1, 100, marca1);
 		assertFalse(andCondition.valida(new ItemVenta(producto, 1)));		
 	}
 
 	@Test
 	public void testANDTwoConditionsOkey() {
-		Marca marca1 = new Marca("Marca1", 30123456784L);
-		Producto producto = new Producto(1, 100, marca1);
+		IMarca marca1 = new MarcaMock(30123456784L);
+		IProducto producto = new ProductoMock(1, 100, marca1);
 		
 		CondicionMarca cm1 = new CondicionMarca(marca1);
 		CondicionProducto cm2 = new CondicionProducto(producto);
@@ -42,50 +50,50 @@ public class CondicionCompuestaTest {
 		andCondition.agregarCondicion(cm1);
 		andCondition.agregarCondicion(cm2);
 						
-		assertTrue(andCondition.valida(new ItemVenta(producto, 1)));		
+		assertTrue(andCondition.valida(new ItemVentaMock(producto, 1)));		
 	}		
 	
 	@Test
 	public void testORTwoConditionsOkey() {
-		Marca marca1 = new Marca("Marca1", 30123456784L);
+		IMarca marca1 = new MarcaMock(30123456784L);
 		CondicionMarca cm1 = new CondicionMarca(marca1);
-		CondicionMarca cm2 = new CondicionMarca(new Marca("Marca2", 20123456784L));
+		CondicionMarca cm2 = new CondicionMarca(new MarcaMock(20123456784L));
 
 		CondicionOR orCondition = new CondicionOR();
 		orCondition.agregarCondicion(cm1);
 		orCondition.agregarCondicion(cm2);
 				
-		Producto producto = new Producto(1, 100, marca1);
+		IProducto producto = new ProductoMock(1, 100, marca1);
 		assertTrue(orCondition.valida(new ItemVenta(producto, 1)));		
 	}
 	
 	@Test
 	public void testORTwoConditionsFail() {
-		CondicionMarca cm1 = new CondicionMarca(new Marca("Marca1", 30123456784L));
-		CondicionMarca cm2 = new CondicionMarca(new Marca("Marca2", 20123456784L));
+		CondicionMarca cm1 = new CondicionMarca(new MarcaMock(30123456784L));
+		CondicionMarca cm2 = new CondicionMarca(new MarcaMock(20123456784L));
 		
 		CondicionOR orCondition = new CondicionOR();
 		orCondition.agregarCondicion(cm1);
 		orCondition.agregarCondicion(cm2);
 				
-		Marca marca3 = new Marca("Marca3", 30023456784L);
-		Producto producto = new Producto(1, 100, marca3);
+		IMarca marca3 = new MarcaMock(30023456784L);
+		IProducto producto = new ProductoMock(1, 100, marca3);
 		assertFalse(orCondition.valida(new ItemVenta(producto, 1)));		
 	}		
 	
 	@Test
 	public void testANDTwoORConditionsFail() {
 		
-		Marca marca2 = new Marca("Marca2", 20123456784L);
-		CondicionMarca cm1 = new CondicionMarca(new Marca("Marca1", 30123456784L));
+		IMarca marca2 = new MarcaMock(20123456784L);
+		CondicionMarca cm1 = new CondicionMarca(new MarcaMock(30123456784L));
 		CondicionMarca cm2 = new CondicionMarca(marca2);
 		CondicionOR orCondition = new CondicionOR();
 		orCondition.agregarCondicion(cm1);
 		orCondition.agregarCondicion(cm2);
 			
-		Rubro rubro1 = new Rubro("Rubro1",1);
+		IRubro rubro1 = new RubroMock(1);
 		CondicionRubro cr1 = new CondicionRubro(rubro1);
-		CondicionRubro cr2 = new CondicionRubro(new Rubro("Rubro2",2));
+		CondicionRubro cr2 = new CondicionRubro(new RubroMock(2));
 		CondicionOR orCondition2 = new CondicionOR();
 		orCondition2.agregarCondicion(cr1);
 		orCondition2.agregarCondicion(cr2);
@@ -94,8 +102,8 @@ public class CondicionCompuestaTest {
 		andCondition.agregarCondicion(orCondition);
 		andCondition.agregarCondicion(orCondition2);
 		
-		Producto producto1 = new Producto(1, 100, marca2, new Rubro("Rubro3", 3));
-		ItemVenta itemVenta = new ItemVenta(producto1, 1);
+		IProducto producto1 = new ProductoMock(1,100,new RubroMock(3),new MarcaMock(5));
+		IItemVenta itemVenta = new ItemVentaMock(producto1, 1);
 		
 		boolean testOR1 = orCondition.valida(itemVenta);
 		boolean testOR2 = orCondition2.valida(itemVenta);
@@ -107,16 +115,16 @@ public class CondicionCompuestaTest {
 	@Test
 	public void testANDTwoORConditions() {
 		
-		Marca marca2 = new Marca("Marca2", 20123456784L);
-		CondicionMarca cm1 = new CondicionMarca(new Marca("Marca1", 30123456784L));
+		IMarca marca2 = new MarcaMock(20123456784L);
+		CondicionMarca cm1 = new CondicionMarca(new MarcaMock(30123456784L));
 		CondicionMarca cm2 = new CondicionMarca(marca2);
 		CondicionOR orCondition = new CondicionOR();
 		orCondition.agregarCondicion(cm1);
 		orCondition.agregarCondicion(cm2);
 			
-		Rubro rubro1 = new Rubro("Rubro1",1);
+		IRubro rubro1 = new RubroMock(1);
 		CondicionRubro cr1 = new CondicionRubro(rubro1);
-		CondicionRubro cr2 = new CondicionRubro(new Rubro("Rubro2",2));
+		CondicionRubro cr2 = new CondicionRubro(new RubroMock(2));
 		CondicionOR orCondition2 = new CondicionOR();
 		orCondition2.agregarCondicion(cr1);
 		orCondition2.agregarCondicion(cr2);
@@ -125,7 +133,7 @@ public class CondicionCompuestaTest {
 		andCondition.agregarCondicion(orCondition);
 		andCondition.agregarCondicion(orCondition2);
 		
-		Producto producto1 = new Producto(1, 200, marca2, rubro1);
+		IProducto producto1 = new ProductoMock(1, 200, rubro1,marca2);
 		assertTrue(andCondition.valida(new ItemVenta(producto1, 1)));
 	}
 }

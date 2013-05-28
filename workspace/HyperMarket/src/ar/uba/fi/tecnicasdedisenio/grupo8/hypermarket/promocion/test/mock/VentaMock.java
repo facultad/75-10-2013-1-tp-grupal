@@ -72,4 +72,9 @@ public class VentaMock implements IVenta {
 		return medioPago;
 	}
 
+	@Override
+	public long getId() {
+		return 0;
+	}
+
 }
