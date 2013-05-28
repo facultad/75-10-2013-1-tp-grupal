@@ -15,7 +15,7 @@ public interface IVenta {
 
 	double getImporteTotalConDescuento(RepositorioPromociones promociones);
 
-	double getImporteTotal();
+	double getImporteTotalSinDescuento();
 
 	Date getFechaVenta();
 

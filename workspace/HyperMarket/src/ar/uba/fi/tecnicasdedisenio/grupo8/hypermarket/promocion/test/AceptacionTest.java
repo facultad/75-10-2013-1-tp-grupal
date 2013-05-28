@@ -7,11 +7,13 @@ import java.util.Date;
 import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMarca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IRubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Marca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.MedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Rubro;
@@ -22,6 +24,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionAND;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMarca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionRubro;
@@ -71,7 +74,7 @@ public class AceptacionTest {
 		ventaJuevesConMedioPagoXYZ.addItem(itemCepillo);
 		ventaJuevesConMedioPagoXYZ.addItem(itemMaceta);
 		
-		assertEquals(15, ventaJuevesConMedioPagoXYZ.getImporteTotal(), 0);
+		assertEquals(15, ventaJuevesConMedioPagoXYZ.getImporteTotalSinDescuento(), 0);
 		assertEquals(1+13*0.9, ventaJuevesConMedioPagoXYZ.getImporteTotalConDescuento(promociones), 0);
 
 	}
@@ -134,14 +137,12 @@ public class AceptacionTest {
 		promociones.add(promocionDebitoLunes10Porciento);
 		promociones.add(promocionSegundaUnidadVinoteca75);
 		
-		assertEquals(2*100+2*75+3+10, venta.getImporteTotal(),0);
-		assertEquals(100+100*.75+75+75*.75+3+10, venta.getImporteTotalConDescuento(promociones),0);
+		assertEquals(2*100+2*75+3+10, venta.getImporteTotalSinDescuento(),0);
+		assertEquals(100+100*.25+75+75*.25+3*.9+10*.9, venta.getImporteTotalConDescuento(promociones),0);
 	}
 
 	@Test
 	public void testAceptacion3() {
-		fail("Not yet implemented");
-
 		/*
 		3) 
 		Dado que: 
@@ -157,6 +158,35 @@ public class AceptacionTest {
 		($10 * 2 (2 ELL)) * 0.90 (descuento del 10) + $20 XXZ + $30 LLL. 
 		- Los descuentos aplicados son: $2 por promo descuento del 10% en vinos.
 		*/ 
+		IRubro rubroVinos=new Rubro(1);
+		IMarca marcaXYZ=new Marca("XYZ", 1);
+		IMarca marcaLLL=new Marca("LLL", 2);
+		ICondicionPromocion condicionVino=new CondicionRubro(rubroVinos);
+		ICondicionPromocion condicionNoXYZ=new CondicionMarca(marcaXYZ);
+		condicionNoXYZ.negar();
+		ICondicionPromocion condicionNoLLL=new CondicionMarca(marcaLLL);
+		condicionNoLLL.negar();
+		CondicionAND condicionVinoYNoXYZYNoLLL=new CondicionAND();
+		condicionVinoYNoXYZYNoLLL.agregarCondicion(condicionVino);
+		condicionVinoYNoXYZYNoLLL.agregarCondicion(condicionNoXYZ);
+		condicionVinoYNoXYZYNoLLL.agregarCondicion(condicionNoLLL);
+		
+		IPromocion promocionVinoYNoXYZYNoLLL10=new Promocion(condicionVinoYNoXYZYNoLLL, 1, .1);
+		
+		IProducto vinoELL=new Producto(1,10,new Marca("ELL", 3),rubroVinos);
+		IProducto vinoXYZ=new Producto(1,20,marcaXYZ,rubroVinos);
+		IProducto vinoLLL=new Producto(1,30,marcaLLL,rubroVinos);
+		
+		IVenta venta=new Venta(new Sucursal(1), new MedioPago(1));
+		venta.addItem(new ItemVenta(vinoELL, 2));
+		venta.addItem(new ItemVenta(vinoXYZ, 1));
+		venta.addItem(new ItemVenta(vinoLLL, 2));
+		
+		RepositorioPromociones promociones=new RepositorioPromociones();
+		promociones.add(promocionVinoYNoXYZYNoLLL10);
+
+		assertEquals(10*2+20+30*2, venta.getImporteTotalSinDescuento(),0);
+		assertEquals(10*2*.9+20+30*2, venta.getImporteTotalConDescuento(promociones),0);
 	}
 
 }

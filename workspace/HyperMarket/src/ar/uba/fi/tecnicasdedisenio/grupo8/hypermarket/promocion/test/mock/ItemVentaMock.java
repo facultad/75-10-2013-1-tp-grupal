@@ -35,4 +35,9 @@ public class ItemVentaMock implements IItemVenta{
 		this.venta=venta;
 	}
 
+	@Override
+	public double getImporteSinDescuento() {
+		throw new UnsupportedOperationException();
+	}
+
 }

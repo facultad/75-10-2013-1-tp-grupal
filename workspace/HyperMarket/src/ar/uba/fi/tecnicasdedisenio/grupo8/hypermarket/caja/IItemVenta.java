@@ -13,4 +13,6 @@ public interface IItemVenta {
 
 	void setVenta(IVenta venta);
 
+	double getImporteSinDescuento();
+
 }

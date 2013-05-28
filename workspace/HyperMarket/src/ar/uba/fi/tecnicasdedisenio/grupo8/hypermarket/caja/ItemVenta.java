@@ -40,4 +40,9 @@ public class ItemVenta implements IItemVenta{
 		this.venta=venta;
 	}
 
+	@Override
+	public double getImporteSinDescuento() {
+		return this.cantidad*this.producto.getPrecioUnitario();
+	}
+
 }

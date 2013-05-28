@@ -5,7 +5,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 
 public class CondicionMedioPago extends CondicionVenta {
 
-	public CondicionMedioPago(IMedioPago debito) {
+	public CondicionMedioPago(IMedioPago medioPago) {
 		throw new UnsupportedOperationException(); 
 	}
 

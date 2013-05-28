@@ -62,14 +62,18 @@ public class Venta implements IVenta{
 		if (this.importeTotalConDescuentoVenta==null){ 
 			DescuentoVenta descuentoVenta=new DescuentoVenta(this, promociones);
 			this.importeTotalConDescuentoVenta=
-				new Double(getImporteTotal()-descuentoVenta.getImporteDescuento());
+				new Double(getImporteTotalSinDescuento()-descuentoVenta.getImporteDescuento());
 		}
 		return this.importeTotalConDescuentoVenta.doubleValue();
 	}
 
 	@Override
-	public double getImporteTotal() {
-		throw new UnsupportedOperationException();
+	public double getImporteTotalSinDescuento() {
+		double importeTotal=0;
+		Iterator<IItemVenta> iterItemVenta=this.getItemsIterator();
+		while (iterItemVenta.hasNext())
+			importeTotal+=iterItemVenta.next().getImporteSinDescuento();
+		return importeTotal;
 	}
 
 	@Override

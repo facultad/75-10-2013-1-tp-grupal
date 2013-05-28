@@ -40,7 +40,7 @@ public class VentaMock implements IVenta {
 	}
 
 	@Override
-	public double getImporteTotal() {
+	public double getImporteTotalSinDescuento() {
 		throw new UnsupportedOperationException();
 	}
 

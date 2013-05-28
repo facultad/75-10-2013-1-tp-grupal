@@ -4,13 +4,13 @@ public class Marca implements IMarca{
 	private String nombre;
 	private long Id;
 	
-	public Marca(String nombre, long cuit){
+	public Marca(String nombre, long id){
 		this.setNombre(nombre);
-		this.setId(cuit);
+		this.setId(id);
 	}
 	
-	private void setId(long cuit){
-		this.Id = cuit;
+	private void setId(long id){
+		this.Id = id;
 	}
 
 	private void setNombre(String nombre){

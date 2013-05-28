@@ -41,7 +41,7 @@ public class DescuentoVenta {
 	
 	public double getImporteDescuento(){
 		if (!this.importeDescuentoVentaCalculado)
-			throw new ImporteDescuentoNoCalculado();
+			return this.calcularImporteDescuento();
 		return this.importeDescuentoVenta;
 	}
 
