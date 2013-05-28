@@ -22,7 +22,7 @@ public class CondicionDependiente extends CondicionItemVenta {
 		Iterator<IItemVenta> iterItemVenta=venta.getItemsIterator();
 		while (iterItemVenta.hasNext()){
 			IItemVenta itemVentaIterado=iterItemVenta.next();
-			// Una condición dependiente solo se verifica en el resto de los items.
+			// Una condiciÃ³n dependiente solo se verifica en el resto de los items.
 			if (itemVentaIterado==itemVenta)
 				continue;
 			if (this.condicionAAplicar.valida(itemVentaIterado))

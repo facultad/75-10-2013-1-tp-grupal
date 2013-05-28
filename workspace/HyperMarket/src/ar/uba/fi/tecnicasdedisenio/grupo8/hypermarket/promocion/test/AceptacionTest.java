@@ -119,7 +119,8 @@ public class AceptacionTest {
 		cal.set(Calendar.MILLISECOND, 0);
 		return new Date(cal.getTimeInMillis());
 	}
-
+	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAceptacion2() {
 		/*
