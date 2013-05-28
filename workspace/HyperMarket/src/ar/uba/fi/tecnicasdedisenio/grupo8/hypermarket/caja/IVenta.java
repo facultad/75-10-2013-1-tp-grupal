@@ -18,5 +18,7 @@ public interface IVenta {
 	double getImporteTotal();
 
 	Date getFechaVenta();
+
+	void setFechaVenta(Date date);
 	
 }

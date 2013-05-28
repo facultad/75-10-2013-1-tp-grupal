@@ -12,6 +12,7 @@ public class Venta implements IVenta{
 	private ISucursal sucursal;
 	private IMedioPago mediopago;
 	private Double importeTotalConDescuentoVenta=null;
+	private Date fechaVenta=new Date();
 	
 	public Venta(ISucursal sucu, IMedioPago mpago){
 		this.listaItems = new ArrayList<IItemVenta>();
@@ -73,7 +74,11 @@ public class Venta implements IVenta{
 
 	@Override
 	public Date getFechaVenta() {
-		return new Date();
+		return this.fechaVenta;
 	}
 	
+	public void setFechaVenta(Date fechaVenta) {
+		this.fechaVenta=fechaVenta;
+	}
+
 }

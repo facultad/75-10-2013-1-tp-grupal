@@ -2,27 +2,35 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IRubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.MedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Rubro;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionAND;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionRubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 
 public class AceptacionTest {
 
 	@Test
 	public void testAceptacion1() {
-		fail("Not yet implemented");
-		
-		
-
 		/*
 		Dado que: 
 		- es Jueves. 
@@ -69,7 +77,6 @@ public class AceptacionTest {
 	}
 	
 	private IVenta crearVentaJuevesConMedioPagoXYZ() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
@@ -77,18 +84,8 @@ public class AceptacionTest {
 		throw new UnsupportedOperationException();
 	}
 
-	private ICondicionPromocion crearCondicionMedioPagoTarjetaXYZ() {
-		throw new UnsupportedOperationException();
-	}
-
-	private ICondicionPromocion crearCondicionDiaJueves() {
-		throw new UnsupportedOperationException();
-	}
-
 	@Test
 	public void testAceptacion2() {
-		fail("Not yet implemented");
-
 		/*
 		2) 
 		Dado que: 
@@ -107,8 +104,38 @@ public class AceptacionTest {
 		- El precio final de la venta debe ser: 
 		(100+25 Pesos (2 vinos X) + 75*2 pesos de Chandon 3 pesos (cepillo) + 10 pesos (maceta)) * 0.90 (descuento tarjeta)
 		- Los descuentos aplicados son: 75 pesos por 2 vinos X promo vinoteca, 10% total por pago con tarjeta debito.
-		*/ 
-
+		*/
+		
+		IMedioPago debito=new MedioPago(1);
+		IVenta venta=new Venta(new Sucursal(1), debito);
+		venta.setFechaVenta(new Date(2013,5,27));
+		
+		IRubro vinoteca=new Rubro("vinoteca", 1);
+		ICondicionPromocion condicionEsDeVinoteca=new CondicionRubro(vinoteca);
+		IPromocion promocionSegundaUnidadVinoteca75=new Promocion(condicionEsDeVinoteca, 2, .75/2);
+		
+		IProducto vino=new Producto(2,100,vinoteca);
+		IProducto chandon=new Producto(3,75,vinoteca);
+		IProducto cepilloDientes=new Producto(4,3);
+		IProducto maceta=new Producto(5,10);
+		
+		CondicionAND condicionDebitoLunes=new CondicionAND();
+		condicionDebitoLunes.agregarCondicion(new CondicionMedioPago(debito));
+		condicionDebitoLunes.agregarCondicion(
+				new CondicionDiaSemana(CondicionDiaSemana.DiaSemana.LUNES));
+		IPromocion promocionDebitoLunes10Porciento=new Promocion(condicionDebitoLunes, 1, .1);
+		
+		venta.addItem(new ItemVenta(vino, 2));
+		venta.addItem(new ItemVenta(chandon, 2));
+		venta.addItem(new ItemVenta(cepilloDientes, 1));
+		venta.addItem(new ItemVenta(maceta, 1));
+		
+		RepositorioPromociones promociones=new RepositorioPromociones();
+		promociones.add(promocionDebitoLunes10Porciento);
+		promociones.add(promocionSegundaUnidadVinoteca75);
+		
+		assertEquals(2*100+2*75+3+10, venta.getImporteTotal(),0);
+		assertEquals(100+100*.75+75+75*.75+3+10, venta.getImporteTotalConDescuento(promociones),0);
 	}
 
 	@Test

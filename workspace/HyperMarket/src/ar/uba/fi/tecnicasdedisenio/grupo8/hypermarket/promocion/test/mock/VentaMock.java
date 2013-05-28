@@ -49,4 +49,9 @@ public class VentaMock implements IVenta {
 		return new Date();
 	}
 
+	@Override
+	public void setFechaVenta(Date date) {
+		throw new UnsupportedOperationException();
+	}
+
 }
