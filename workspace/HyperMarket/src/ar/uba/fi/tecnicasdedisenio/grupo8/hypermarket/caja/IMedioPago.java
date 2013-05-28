@@ -6,5 +6,7 @@ public interface IMedioPago extends Identificable {
 
 	public boolean hasEntidadFinanciera();
 	
+	public void setEntidadFinanciera(IEntidadFinanciera entidadFinanciera);
+	
 	String getDescripcion();
 }

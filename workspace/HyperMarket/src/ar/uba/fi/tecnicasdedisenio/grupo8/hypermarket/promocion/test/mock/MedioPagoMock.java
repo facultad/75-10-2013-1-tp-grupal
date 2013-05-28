@@ -37,4 +37,9 @@ public class MedioPagoMock implements IMedioPago{
 		return null;
 	}
 
+	@Override
+	public void setEntidadFinanciera(IEntidadFinanciera entidadFinanciera) {
+		throw new UnsupportedOperationException();
+	}
+
 }

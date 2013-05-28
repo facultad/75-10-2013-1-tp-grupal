@@ -13,7 +13,7 @@ public class DescuentoVenta {
 	private IVenta venta;
 	private RepositorioPromociones repositorioPromociones;
 	private Collection<ItemDescuento> itemsDescuento;
-	private int importeDescuentoVenta;
+	private double importeDescuentoVenta;
 	private boolean importeDescuentoVentaCalculado; 
 
 	public DescuentoVenta(IVenta venta,RepositorioPromociones repositorioPromociones) {

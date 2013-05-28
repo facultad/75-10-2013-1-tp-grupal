@@ -2,11 +2,10 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class EntidadFinanciera implements IEntidadFinanciera {
 	
-	private long id;
+	private long id=IdGenerator.getInstance().getNewId();
 	private String nombreEntidad;
 	
-	public EntidadFinanciera(long id, String nombreEntidad) {
-		this.id = id;
+	public EntidadFinanciera(String nombreEntidad) {
 		this.nombreEntidad = nombreEntidad;
 	}
 	

@@ -2,10 +2,13 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.EntidadFinanciera;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IEntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMarca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
@@ -20,10 +23,12 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Rubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionAND;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionEntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMarca;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
@@ -31,6 +36,8 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.Condic
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
 
 public class AceptacionTest {
+	
+	private static final double TOLERANCIA = 0.00000000001;
 
 	@Test
 	public void testAceptacion1() {
@@ -52,19 +59,33 @@ public class AceptacionTest {
 		(1 Peso (2 cocas) + 3 pesos (cepillo) + 10 pesos (maceta)) * 0.90 (descuento tarjeta) 
 		- Los descuentos aplicados son: 1 peso por promo 2x1 coca, 10% total por pago con tarjeta XYZ. 
 		*/
-		IVenta ventaJuevesConMedioPagoXYZ=crearVentaJuevesConMedioPagoXYZ();
+		IMedioPago tarjetaXYZ=new MedioPago("Tarjeta");
+		IEntidadFinanciera entidadFinancieraXYZ=new EntidadFinanciera("XYZ");
+		tarjetaXYZ.setEntidadFinanciera(entidadFinancieraXYZ);
+		IVenta ventaJuevesConMedioPagoXYZ=new Venta(new Sucursal("Central"),tarjetaXYZ);
+		ventaJuevesConMedioPagoXYZ.setFechaVenta(getFecha(2013,05,30));
+		
 		IProducto coca=new Producto(1);
 		ICondicionPromocion condicionEsCoca=new CondicionProducto(coca);
 		IPromocion promocionCoca2x1=new Promocion(condicionEsCoca, 2, 0.5);
-		ICondicionPromocion condicionEsJuevesYMedioPagoTarjetaXYZ=
-				this.crearCondicionDiaJuevesYMedioPagoTarjetaXYZ();
-		IPromocion promocionTarjetaXYZ=new Promocion(condicionEsJuevesYMedioPagoTarjetaXYZ,1,0.1);
+		
+		CondicionAND condicionTarjetaXYZJueves=new CondicionAND();
+		ICondicionPromocion condicionJueves=
+			new CondicionDiaSemana(CondicionDiaSemana.DiaSemana.JUEVES);
+		condicionTarjetaXYZJueves.agregarCondicion(condicionJueves);
+		ICondicionPromocion condicionTarjeta=new CondicionMedioPago(tarjetaXYZ);
+		condicionTarjetaXYZJueves.agregarCondicion(condicionTarjeta);
+		ICondicionPromocion condicionEntidadXYZ=
+				new CondicionEntidadFinanciera(tarjetaXYZ.getEntidadFinanciera());
+		condicionTarjetaXYZJueves.agregarCondicion(condicionEntidadXYZ);
+		IPromocion promocionTarjetaXYZJueves10=new Promocion(condicionTarjetaXYZJueves, 1, 0.1);
+		
 		IProducto cepilloDientes=new Producto(3);
 		IProducto maceta=new Producto(10);
 		
 		RepositorioPromociones promociones=new RepositorioPromociones();
 		promociones.add(promocionCoca2x1);
-		promociones.add(promocionTarjetaXYZ);
+		promociones.add(promocionTarjetaXYZJueves10);
 		
 		IItemVenta itemCoca=new ItemVenta(coca, 2);
 		IItemVenta itemCepillo=new ItemVenta(cepilloDientes, 1);
@@ -75,16 +96,28 @@ public class AceptacionTest {
 		ventaJuevesConMedioPagoXYZ.addItem(itemMaceta);
 		
 		assertEquals(15, ventaJuevesConMedioPagoXYZ.getImporteTotalSinDescuento(), 0);
-		assertEquals(1+13*0.9, ventaJuevesConMedioPagoXYZ.getImporteTotalConDescuento(promociones), 0);
+		
+		assertEquals(1, (new ItemDescuento(itemCoca,promociones)).calcularImporteDescuento(), 0);
+		assertTrue(condicionJueves.valida(itemCepillo));
+		assertTrue(condicionTarjetaXYZJueves.valida(itemCepillo));
+		assertTrue(promocionTarjetaXYZJueves10.aplicaParaItemVenta(itemCepillo));
+		assertEquals(0.3, (new ItemDescuento(itemCepillo,promociones)).calcularImporteDescuento(), TOLERANCIA);
+		assertEquals(1, (new ItemDescuento(itemMaceta,promociones)).calcularImporteDescuento(), TOLERANCIA);
+		
+		assertEquals(1+13*0.9, ventaJuevesConMedioPagoXYZ.getImporteTotalConDescuento(promociones), TOLERANCIA);
 
 	}
 	
-	private IVenta crearVentaJuevesConMedioPagoXYZ() {
-		throw new UnsupportedOperationException();
-	}
-
-	private ICondicionPromocion crearCondicionDiaJuevesYMedioPagoTarjetaXYZ() {
-		throw new UnsupportedOperationException();
+	private Date getFecha(int year, int month, int day) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month-1);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return new Date(cal.getTimeInMillis());
 	}
 
 	@Test
@@ -111,7 +144,7 @@ public class AceptacionTest {
 		
 		IMedioPago debito=new MedioPago("Debito");
 		IVenta venta=new Venta(new Sucursal("Central"), debito);
-		venta.setFechaVenta(new Date(2013,5,27));
+		venta.setFechaVenta(getFecha(2013,5,27));
 		
 		IRubro vinoteca=new Rubro("vinoteca");
 		ICondicionPromocion condicionEsDeVinoteca=new CondicionRubro(vinoteca);
