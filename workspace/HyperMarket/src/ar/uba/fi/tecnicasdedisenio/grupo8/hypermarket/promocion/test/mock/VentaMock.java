@@ -6,13 +6,25 @@ import java.util.Date;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class VentaMock implements IVenta {
 
 	Collection<IItemVenta> items=new ArrayList<IItemVenta>();
+	private Date date;
+	private IMedioPago medioPago;
 
+	public VentaMock() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public VentaMock(IMedioPago medioPago) {
+		this.medioPago = medioPago;
+	}
+	
+	
 	@Override
 	public void addItem(IItemVenta itemVenta) {
 		this.items.add(itemVenta);
@@ -46,12 +58,18 @@ public class VentaMock implements IVenta {
 
 	@Override
 	public Date getFechaVenta() {
-		return new Date();
+		if (this.date == null) this.date = new Date();
+		return this.date;
 	}
 
 	@Override
 	public void setFechaVenta(Date date) {
-		throw new UnsupportedOperationException();
+		this.date = date;
+	}
+
+	@Override
+	public IMedioPago getPago() {
+		return medioPago;
 	}
 
 }

@@ -21,4 +21,6 @@ public interface IVenta {
 
 	void setFechaVenta(Date date);
 	
+	public IMedioPago getPago();
+	
 }
