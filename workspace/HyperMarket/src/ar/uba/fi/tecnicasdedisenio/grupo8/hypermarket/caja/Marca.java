@@ -1,6 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class Marca implements IMarca {
+	private static IMarca marcaNoDefinida=new Marca("No definida");
 	private String nombre;
 	private long id = IdGenerator.getInstance().getNewId();
 	
@@ -19,5 +20,9 @@ public class Marca implements IMarca {
 	
 	public String getNombre() {
 		return this.nombre;
+	}
+
+	public static IMarca getMarcaNoDefinida() {
+		return Marca.marcaNoDefinida;
 	}
 }

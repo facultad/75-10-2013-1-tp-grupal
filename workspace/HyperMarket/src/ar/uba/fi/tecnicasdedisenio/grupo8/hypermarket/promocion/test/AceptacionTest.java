@@ -53,14 +53,14 @@ public class AceptacionTest {
 		- Los descuentos aplicados son: 1 peso por promo 2x1 coca, 10% total por pago con tarjeta XYZ. 
 		*/
 		IVenta ventaJuevesConMedioPagoXYZ=crearVentaJuevesConMedioPagoXYZ();
-		IProducto coca=new Producto(1,1);
+		IProducto coca=new Producto(1);
 		ICondicionPromocion condicionEsCoca=new CondicionProducto(coca);
 		IPromocion promocionCoca2x1=new Promocion(condicionEsCoca, 2, 0.5);
 		ICondicionPromocion condicionEsJuevesYMedioPagoTarjetaXYZ=
 				this.crearCondicionDiaJuevesYMedioPagoTarjetaXYZ();
 		IPromocion promocionTarjetaXYZ=new Promocion(condicionEsJuevesYMedioPagoTarjetaXYZ,1,0.1);
-		IProducto cepilloDientes=new Producto(2,3);
-		IProducto maceta=new Producto(3,10);
+		IProducto cepilloDientes=new Producto(3);
+		IProducto maceta=new Producto(10);
 		
 		RepositorioPromociones promociones=new RepositorioPromociones();
 		promociones.add(promocionCoca2x1);
@@ -109,18 +109,18 @@ public class AceptacionTest {
 		- Los descuentos aplicados son: 75 pesos por 2 vinos X promo vinoteca, 10% total por pago con tarjeta debito.
 		*/
 		
-		IMedioPago debito=new MedioPago(1);
-		IVenta venta=new Venta(new Sucursal(1), debito);
+		IMedioPago debito=new MedioPago("Debito");
+		IVenta venta=new Venta(new Sucursal("Central"), debito);
 		venta.setFechaVenta(new Date(2013,5,27));
 		
-		IRubro vinoteca=new Rubro("vinoteca", 1);
+		IRubro vinoteca=new Rubro("vinoteca");
 		ICondicionPromocion condicionEsDeVinoteca=new CondicionRubro(vinoteca);
 		IPromocion promocionSegundaUnidadVinoteca75=new Promocion(condicionEsDeVinoteca, 2, .75/2);
 		
-		IProducto vino=new Producto(2,100,vinoteca);
-		IProducto chandon=new Producto(3,75,vinoteca);
-		IProducto cepilloDientes=new Producto(4,3);
-		IProducto maceta=new Producto(5,10);
+		IProducto vino=new Producto(100,vinoteca);
+		IProducto chandon=new Producto(75,vinoteca);
+		IProducto cepilloDientes=new Producto(3);
+		IProducto maceta=new Producto(10);
 		
 		CondicionAND condicionDebitoLunes=new CondicionAND();
 		condicionDebitoLunes.agregarCondicion(new CondicionMedioPago(debito));
@@ -158,9 +158,9 @@ public class AceptacionTest {
 		($10 * 2 (2 ELL)) * 0.90 (descuento del 10) + $20 XXZ + $30 LLL. 
 		- Los descuentos aplicados son: $2 por promo descuento del 10% en vinos.
 		*/ 
-		IRubro rubroVinos=new Rubro(1);
-		IMarca marcaXYZ=new Marca("XYZ", 1);
-		IMarca marcaLLL=new Marca("LLL", 2);
+		IRubro rubroVinos=new Rubro("vinos");
+		IMarca marcaXYZ=new Marca("XYZ");
+		IMarca marcaLLL=new Marca("LLL");
 		ICondicionPromocion condicionVino=new CondicionRubro(rubroVinos);
 		ICondicionPromocion condicionNoXYZ=new CondicionMarca(marcaXYZ);
 		condicionNoXYZ.negar();
@@ -173,11 +173,11 @@ public class AceptacionTest {
 		
 		IPromocion promocionVinoYNoXYZYNoLLL10=new Promocion(condicionVinoYNoXYZYNoLLL, 1, .1);
 		
-		IProducto vinoELL=new Producto(1,10,new Marca("ELL", 3),rubroVinos);
-		IProducto vinoXYZ=new Producto(1,20,marcaXYZ,rubroVinos);
-		IProducto vinoLLL=new Producto(1,30,marcaLLL,rubroVinos);
+		IProducto vinoELL=new Producto(10,new Marca("ELL"),rubroVinos);
+		IProducto vinoXYZ=new Producto(20,marcaXYZ,rubroVinos);
+		IProducto vinoLLL=new Producto(30,marcaLLL,rubroVinos);
 		
-		IVenta venta=new Venta(new Sucursal(1), new MedioPago(1));
+		IVenta venta=new Venta(new Sucursal("Central"), new MedioPago("efectivo"));
 		venta.addItem(new ItemVenta(vinoELL, 2));
 		venta.addItem(new ItemVenta(vinoXYZ, 1));
 		venta.addItem(new ItemVenta(vinoLLL, 2));
