@@ -8,14 +8,12 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.MedioPago;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana.DiaSemana;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.MedioPagoMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.SucursalMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.VentaMock;
 
 public class CondicionDiaSemanaTest {
 
@@ -23,7 +21,7 @@ public class CondicionDiaSemanaTest {
 	public void pasaCondicion() {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.MARTES);
-		IVenta venta=new Venta(new SucursalMock(1), new MedioPagoMock(1));
+		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertTrue(condicion.valida(itemVenta));
 	}
@@ -32,7 +30,7 @@ public class CondicionDiaSemanaTest {
 	public void noPasaCondicion() {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.SABADO);
-		IVenta venta=new Venta(new SucursalMock(1), new MedioPagoMock(1));
+		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertFalse(condicion.valida(itemVenta));
 	}
@@ -42,7 +40,7 @@ public class CondicionDiaSemanaTest {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.MARTES);
 		condicion.negar();
-		IVenta venta=new Venta(new SucursalMock(1), new MedioPagoMock(1));
+		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertFalse(condicion.valida(itemVenta));
 	}
@@ -52,7 +50,7 @@ public class CondicionDiaSemanaTest {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.SABADO);
 		condicion.negar();
-		IVenta venta=new Venta(new SucursalMock(1), new MedioPagoMock(1));
+		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertTrue(condicion.valida(itemVenta));
 	}

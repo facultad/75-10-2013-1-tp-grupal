@@ -15,6 +15,12 @@ public class ItemVentaMock implements IItemVenta{
 		this.cantidad=cantidad;
 	}
 
+	public ItemVentaMock(IProducto producto, int cantidad, IVenta venta) {
+		this.producto = producto;
+		this.venta = venta;
+		this.cantidad = cantidad;
+	}
+
 	@Override
 	public IProducto getProducto() {
 		return this.producto;

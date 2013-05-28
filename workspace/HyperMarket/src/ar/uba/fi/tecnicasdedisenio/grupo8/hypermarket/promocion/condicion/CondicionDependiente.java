@@ -1,14 +1,10 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.CondicionAAplicarNoDefinidas;
 
 public class CondicionDependiente extends CondicionItemVenta {
 
