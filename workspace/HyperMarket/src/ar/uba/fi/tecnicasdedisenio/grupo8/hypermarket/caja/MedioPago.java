@@ -1,6 +1,8 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 public class MedioPago implements IMedioPago{
+
+	public static IMedioPago NoDefinido = new MedioPago("No definido");
 	private long id = IdGenerator.getInstance().getNewId();
 	private String descripcion;
 	

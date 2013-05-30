@@ -9,6 +9,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ISucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class VentaMock implements IVenta {
@@ -54,7 +55,7 @@ public class VentaMock implements IVenta {
 	}
 
 	@Override
-	public double getImporteTotalConDescuento(RepositorioPromociones promociones) {
+	public double getImporteTotalConDescuento() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -88,6 +89,26 @@ public class VentaMock implements IVenta {
 	public ISucursal getSucursal(){
 		if (this.sucursal == null) this.sucursal = new SucursalMock(1);
 		return this.sucursal;
+	}
+
+	@Override
+	public Collection<ItemDescuento> getItemsDescuento() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double calcularDescuento(RepositorioPromociones promociones) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setMedioPago(IMedioPago medioPago) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public IMedioPago getMedioPago() {
+		throw new UnsupportedOperationException();
 	}
 	
 

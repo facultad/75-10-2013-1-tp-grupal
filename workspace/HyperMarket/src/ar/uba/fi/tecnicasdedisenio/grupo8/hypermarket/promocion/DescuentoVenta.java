@@ -44,4 +44,8 @@ public class DescuentoVenta {
 		return this.importeDescuentoVenta;
 	}
 
+	public Collection<ItemDescuento> getItemsDescuento() {
+		return this.itemsDescuento;
+	}
+
 }

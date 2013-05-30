@@ -106,7 +106,8 @@ public class AceptacionTest {
 		assertEquals(0.3, (new ItemDescuento(itemCepillo,promociones)).calcularImporteDescuento(), TOLERANCIA);
 		assertEquals(1, (new ItemDescuento(itemMaceta,promociones)).calcularImporteDescuento(), TOLERANCIA);
 		
-		assertEquals(1+13*0.9, ventaJuevesConMedioPagoXYZ.getImporteTotalConDescuento(promociones), TOLERANCIA);
+		ventaJuevesConMedioPagoXYZ.calcularDescuento(promociones);
+		assertEquals(1+13*0.9, ventaJuevesConMedioPagoXYZ.getImporteTotalConDescuento(), TOLERANCIA);
 
 	}
 	
@@ -161,7 +162,8 @@ public class AceptacionTest {
 		promociones.add(promocionSegundaUnidadVinoteca75);
 		
 		assertEquals(2*100+2*75+3+10, venta.getImporteTotalSinDescuento(),0);
-		assertEquals(100+100*.25+75+75*.25+3*.9+10*.9, venta.getImporteTotalConDescuento(promociones),0);
+		venta.calcularDescuento(promociones);
+		assertEquals(100+100*.25+75+75*.25+3*.9+10*.9, venta.getImporteTotalConDescuento(),0);
 	}
 
 	@Test
@@ -209,7 +211,8 @@ public class AceptacionTest {
 		promociones.add(promocionVinoYNoXYZYNoLLL10);
 
 		assertEquals(10*2+20+30*2, venta.getImporteTotalSinDescuento(),0);
-		assertEquals(10*2*.9+20+30*2, venta.getImporteTotalConDescuento(promociones),0);
+		venta.calcularDescuento(promociones);
+		assertEquals(10*2*.9+20+30*2, venta.getImporteTotalConDescuento(),0);
 	}
 
 
@@ -289,8 +292,9 @@ public class AceptacionTest {
 		
 		assertEquals(4, itemCepilloClear.calcularImporteConDescuento(repositorioPromociones),
 				TOLERANCIA);
+		venta.calcularDescuento(repositorioPromociones);
 		assertEquals(10*0.9+4*0.9+4+8*2*0.9, 
-				venta.getImporteTotalConDescuento(repositorioPromociones),
+				venta.getImporteTotalConDescuento(),
 				TOLERANCIA);
 
 	}

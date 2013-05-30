@@ -1,8 +1,10 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public interface IVenta extends Identificable{
@@ -13,7 +15,7 @@ public interface IVenta extends Identificable{
 	public void imprimeItems();
 	public int getCantidadUnidades();
 
-	double getImporteTotalConDescuento(RepositorioPromociones promociones);
+	double getImporteTotalConDescuento();
 
 	double getImporteTotalSinDescuento();
 
@@ -24,4 +26,12 @@ public interface IVenta extends Identificable{
 	public IMedioPago getPago();
 	
 	ISucursal getSucursal();
+
+	Collection<ItemDescuento> getItemsDescuento();
+	
+	public double calcularDescuento(RepositorioPromociones promociones);
+
+	void setMedioPago(IMedioPago medioPago);
+
+	IMedioPago getMedioPago();
 }
