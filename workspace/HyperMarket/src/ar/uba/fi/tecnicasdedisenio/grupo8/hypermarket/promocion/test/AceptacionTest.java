@@ -63,7 +63,7 @@ public class AceptacionTest {
 		IEntidadFinanciera entidadFinancieraXYZ=new EntidadFinanciera("XYZ");
 		tarjetaXYZ.setEntidadFinanciera(entidadFinancieraXYZ);
 		IVenta ventaJuevesConMedioPagoXYZ=new Venta(new Sucursal("Central"),tarjetaXYZ);
-		ventaJuevesConMedioPagoXYZ.setFechaVenta(getFecha(2013,05,30));
+		ventaJuevesConMedioPagoXYZ.setFechaVenta(Fecha.getFecha(2013,05,30));
 		
 		IProducto coca=new Producto(1);
 		ICondicionPromocion condicionEsCoca=new CondicionProducto(coca);
@@ -108,19 +108,6 @@ public class AceptacionTest {
 
 	}
 	
-	private Date getFecha(int year, int month, int day) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month-1);
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-		return new Date(cal.getTimeInMillis());
-	}
-	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testAceptacion2() {
 		/*
@@ -145,7 +132,7 @@ public class AceptacionTest {
 		
 		IMedioPago debito=new MedioPago("Debito");
 		IVenta venta=new Venta(new Sucursal("Central"), debito);
-		venta.setFechaVenta(getFecha(2013,5,27));
+		venta.setFechaVenta(Fecha.getFecha(2013,5,27));
 		
 		IRubro vinoteca=new Rubro("vinoteca");
 		ICondicionPromocion condicionEsDeVinoteca=new CondicionRubro(vinoteca);

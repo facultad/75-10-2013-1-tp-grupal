@@ -22,6 +22,7 @@ public class CondicionDiaSemanaTest {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.MARTES);
 		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
+		venta.setFechaVenta(Fecha.getFecha(2013, 05, 28));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertTrue(condicion.valida(itemVenta));
 	}
@@ -31,6 +32,7 @@ public class CondicionDiaSemanaTest {
 		IProducto producto=new ProductoMock(1,10);
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.SABADO);
 		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
+		venta.setFechaVenta(Fecha.getFecha(2013, 05, 29));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertFalse(condicion.valida(itemVenta));
 	}
@@ -41,6 +43,7 @@ public class CondicionDiaSemanaTest {
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.MARTES);
 		condicion.negar();
 		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
+		venta.setFechaVenta(Fecha.getFecha(2013, 06, 04));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertFalse(condicion.valida(itemVenta));
 	}
@@ -51,6 +54,7 @@ public class CondicionDiaSemanaTest {
 		CondicionDiaSemana condicion=new CondicionDiaSemana(DiaSemana.SABADO);
 		condicion.negar();
 		IVenta venta=new VentaMock(new SucursalMock(1), new MedioPagoMock(1));
+		venta.setFechaVenta(Fecha.getFecha(2013, 05, 31));
 		IItemVenta itemVenta = new ItemVenta(producto, 10, venta);
 		assertTrue(condicion.valida(itemVenta));
 	}
