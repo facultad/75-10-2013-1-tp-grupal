@@ -30,7 +30,7 @@ public class AperturaCaja {
 		this.ventaActual=venta;
 	}
 
-	private boolean ventaIniciada() {
+	public boolean ventaIniciada() {
 		return this.ventaActual!=null;
 	}
 
@@ -106,6 +106,8 @@ public class AperturaCaja {
 				importeExistente=
 					importeTotalPorMedioPago.get(venta.getMedioPago()).doubleValue();
 			
+			if (venta==this.getVentaActual())
+				venta.calcularDescuento(ProveedorPromociones.getInstance().getPromociones());
 			Double nuevoImporte=new Double(importeExistente+
 					venta.getImporteTotalConDescuento());
 			
