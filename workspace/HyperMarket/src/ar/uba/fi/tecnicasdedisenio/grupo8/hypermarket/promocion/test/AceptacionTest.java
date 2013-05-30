@@ -2,9 +2,6 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.junit.Test;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.EntidadFinanciera;
@@ -22,7 +19,6 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Rubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;

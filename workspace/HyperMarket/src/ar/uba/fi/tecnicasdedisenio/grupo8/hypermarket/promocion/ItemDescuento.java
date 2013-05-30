@@ -1,6 +1,5 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
