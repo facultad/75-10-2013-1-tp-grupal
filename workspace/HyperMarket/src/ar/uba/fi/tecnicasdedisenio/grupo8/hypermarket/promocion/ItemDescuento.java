@@ -43,7 +43,7 @@ public class ItemDescuento {
 		this.importeDescuentoVenta=0;
 		while (iterPromocionAAplicar.hasNext()){
 			IPromocion promocionAAplicar=iterPromocionAAplicar.next();
-			this.importeDescuentoVenta=promocionAAplicar.getImporteADescontar(this.itemVenta);
+			this.importeDescuentoVenta+=promocionAAplicar.getImporteADescontar(this.itemVenta);
 		}
 		this.importeDescuentoVentaCalculado=true;
 		return this.importeDescuentoVenta;

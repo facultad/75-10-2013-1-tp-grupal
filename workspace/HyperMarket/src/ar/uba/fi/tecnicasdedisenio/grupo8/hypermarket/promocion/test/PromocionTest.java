@@ -193,8 +193,8 @@ public class PromocionTest {
 		} catch (PromocionNoAplicaParaItemVenta e) {
 			// Paso el test ya que la promoción no aplica para el item pasado.
 		}
-		assertEquals(4,promocion.getImporteADescontar(itemVenta2),0);
-		assertEquals(9,promocion.getImporteADescontar(itemVenta3),0);
+		assertEquals(2,promocion.getImporteADescontar(itemVenta2),0);
+		assertEquals(3,promocion.getImporteADescontar(itemVenta3),0);
 	}
 
 }

@@ -4,7 +4,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IEntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 
-public class CondicionEntidadFinanciera extends BaseCondicionPromocion {
+public class CondicionEntidadFinanciera extends CondicionVenta {
 
 	IEntidadFinanciera entidadFinanciera;
 	

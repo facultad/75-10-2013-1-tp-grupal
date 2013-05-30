@@ -1,5 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class ItemVenta implements IItemVenta{
 	private IProducto producto;
@@ -49,6 +51,12 @@ public class ItemVenta implements IItemVenta{
 	@Override
 	public void setVenta(IVenta venta) {
 		this.venta=venta;
+	}
+
+	@Override
+	public double calcularImporteConDescuento(RepositorioPromociones repositorioPromociones) {
+		ItemDescuento itemDescuento=new ItemDescuento(this, repositorioPromociones);
+		return itemDescuento.calcularImporteDescuento();
 	}
 
 }

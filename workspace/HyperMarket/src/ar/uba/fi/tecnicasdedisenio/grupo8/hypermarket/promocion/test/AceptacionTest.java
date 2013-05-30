@@ -22,11 +22,13 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Rubro;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Venta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionAND;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDependiente;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDiaSemana;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionEntidadFinanciera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMarca;
@@ -210,4 +212,86 @@ public class AceptacionTest {
 		assertEquals(10*2*.9+20+30*2, venta.getImporteTotalConDescuento(promociones),0);
 	}
 
+
+	@Test
+	public void testAceptacion4() {
+		/*
+		 * Dado que:
+		 * - Existe promo 10% de descuento  con cualquier medio de 
+		 * pago del banco BBB los viernes.
+		 * - Llevando un dentifrico colgate white lleva gratis un cepillo 
+		 *   colgate clear.
+		 *   
+		 * - El azucar sale 4, el pan lactal de 360 sale 8 y el dentifrico
+		 *   colgate white sale 10.
+		 *   
+		 * Cuando:
+		 * - Se realiza una venta de 
+		 * 		1 dentifrico colgate, 
+		 * 		1 azucar,
+		 * 		2 cepillos clear (cada uno sale 4),
+		 * 		2 pan lactal de 360
+		 * - Se paga con algún medio de pago del banco BBB
+		 * 
+		 * Entonces:
+		 * - El precio sin descuento es: 10+4+4*2+8*2
+		 * - El precio sin descuento es: 10*0.9+4*0.9+4+8*2*0.9
+		 */
+		
+		IProducto azucar=new Producto(4);
+		IProducto panLactal360=new Producto(8);
+		IProducto dentifricoColgateWhite=new Producto(10);
+		IProducto cepilloClear=new Producto(4);
+		IEntidadFinanciera bancoBBB=new EntidadFinanciera("Banco BBB");
+		
+		CondicionAND condicionEsBancoBBBYEsViernes=new CondicionAND();
+		ICondicionPromocion condicionEsBancoBBB=
+				new CondicionEntidadFinanciera(bancoBBB);
+		condicionEsBancoBBBYEsViernes.agregarCondicion(condicionEsBancoBBB);
+		ICondicionPromocion condicionEsViernes=
+				new CondicionDiaSemana(CondicionDiaSemana.DiaSemana.VIERNES);
+		condicionEsBancoBBBYEsViernes.agregarCondicion(condicionEsViernes);
+		IPromocion promoBancoBBBYViernes10=new Promocion(condicionEsBancoBBBYEsViernes, 1, 0.1);
+		
+		CondicionAND condicionEsCepilloClearYExisteDentifricoWhite=
+				new CondicionAND();
+		ICondicionPromocion condicionEsDentifricoWhite=
+				new CondicionProducto(dentifricoColgateWhite);
+		ICondicionPromocion condicionExisteDentifricoWhite=
+				new CondicionDependiente(condicionEsDentifricoWhite);
+		condicionEsCepilloClearYExisteDentifricoWhite.agregarCondicion(
+				condicionExisteDentifricoWhite);
+		ICondicionPromocion condicionEsCepilloClear=
+				new CondicionProducto(cepilloClear);
+		condicionEsCepilloClearYExisteDentifricoWhite.agregarCondicion(
+				condicionEsCepilloClear);
+		IPromocion promocionGratisCepilloClearPorDentifricoWhite=
+				new Promocion(condicionEsCepilloClearYExisteDentifricoWhite,
+						1, 1);
+		
+		RepositorioPromociones repositorioPromociones=new RepositorioPromociones();
+		repositorioPromociones.add(promoBancoBBBYViernes10);
+		repositorioPromociones.add(promocionGratisCepilloClearPorDentifricoWhite);
+		
+		IMedioPago debitoBancoBBB=new MedioPago("debito");
+		debitoBancoBBB.setEntidadFinanciera(bancoBBB);
+		IVenta venta=new Venta(new Sucursal("Central"),debitoBancoBBB);
+		venta.setFechaVenta(Fecha.getFecha(2013, 05, 31));
+		
+		venta.addItem(new ItemVenta(dentifricoColgateWhite,1));
+		venta.addItem(new ItemVenta(azucar,1));
+		IItemVenta itemCepilloClear=new ItemVenta(cepilloClear,2);
+		venta.addItem(itemCepilloClear);
+		venta.addItem(new ItemVenta(panLactal360,2));
+		
+		assertEquals(10+4+4*2+8*2, venta.getImporteTotalSinDescuento(),
+				TOLERANCIA);
+		
+		assertEquals(4, itemCepilloClear.calcularImporteConDescuento(repositorioPromociones),
+				TOLERANCIA);
+		assertEquals(10*0.9+4*0.9+4+8*2*0.9, 
+				venta.getImporteTotalConDescuento(repositorioPromociones),
+				TOLERANCIA);
+
+	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 
-public class CondicionPeriodo extends BaseCondicionPromocion {
+public class CondicionPeriodo extends CondicionVenta {
 
 	Date desde;
 	Date hasta;

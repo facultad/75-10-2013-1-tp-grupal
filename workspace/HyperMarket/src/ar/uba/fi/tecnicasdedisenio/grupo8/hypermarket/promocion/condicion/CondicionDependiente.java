@@ -1,10 +1,13 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.CondicionNoValidaParaItemVenta;
 
 public class CondicionDependiente extends CondicionItemVenta {
 
@@ -29,6 +32,25 @@ public class CondicionDependiente extends CondicionItemVenta {
 				return true;
 		}
 		return false;
+	}
+
+	public Collection<IItemVenta> getItemsDeLosQueDepende(IItemVenta itemVenta){
+		Collection<IItemVenta> itemsDeLosQueDepende=new ArrayList<IItemVenta>();
+		IVenta venta=itemVenta.getVenta();
+		if (venta==null)
+			throw new ItemVentaNoEstaAsociadoANingunaVenta();
+		Iterator<IItemVenta> iterItemVenta=venta.getItemsIterator();
+		while (iterItemVenta.hasNext()){
+			IItemVenta itemVentaIterado=iterItemVenta.next();
+			// Una condición dependiente solo se verifica en el resto de los items.
+			if (itemVentaIterado==itemVenta)
+				continue;
+			if (this.condicionAAplicar.valida(itemVentaIterado)){
+				itemsDeLosQueDepende.add(itemVentaIterado);
+				return itemsDeLosQueDepende;
+			}
+		}
+		throw new CondicionNoValidaParaItemVenta();
 	}
 
 }

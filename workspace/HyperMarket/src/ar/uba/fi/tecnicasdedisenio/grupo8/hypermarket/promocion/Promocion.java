@@ -1,5 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
+import java.util.Collection;
+
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionSiempreVerdadera;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
@@ -39,8 +41,21 @@ public class Promocion implements IPromocion{
 	public int getCantidadProductosAplicaParaItemVenta(IItemVenta itemVenta) {
 		if (!this.aplicaParaItemVenta(itemVenta))
 			throw new PromocionNoAplicaParaItemVenta();
-		return itemVenta.getCantidadProductos()-
-			(itemVenta.getCantidadProductos()%this.getCantidadProductosAplica());
+		Collection<IItemVenta> itemsDeLosQueDependeYItemEnEstudio=
+				this.condicion.getItemsDeLosQueDepende(itemVenta);
+		itemsDeLosQueDependeYItemEnEstudio.add(itemVenta);
+		int cantidad=this.getMinimoCantidadesItems(itemsDeLosQueDependeYItemEnEstudio);
+		return cantidad-(cantidad%this.getCantidadProductosAplica());
+	}
+
+	private int getMinimoCantidadesItems(
+			Collection<IItemVenta> itemsVenta) {
+		int cantidad=Integer.MAX_VALUE;
+		for (IItemVenta iItemVenta:itemsVenta){
+			if (iItemVenta.getCantidadProductos()<cantidad)
+				cantidad=iItemVenta.getCantidadProductos();
+		}
+		return cantidad;
 	}
 
 	public int getCantidadProductosAplica() {

@@ -83,7 +83,7 @@ public class ItemDescuentoTest {
 		IProducto producto2=new ProductoMock(2,20);
 		IProducto producto3=new ProductoMock(3,30);
 		
-		IItemVenta itemVenta1=new ItemVentaMock(producto1, 1);
+		IItemVenta itemVenta1=new ItemVentaMock(producto1, 2);
 		IItemVenta itemVenta2=new ItemVentaMock(producto2, 2);
 		IItemVenta itemVenta3=new ItemVentaMock(producto3, 3);
 		IVenta venta=new VentaMock();
@@ -149,10 +149,10 @@ public class ItemDescuentoTest {
 		
 		assertEquals(0,itemDescuento1.calcularImporteDescuento(),0);
 		assertEquals(8,itemDescuento2.calcularImporteDescuento(),0);
-		assertEquals(18,itemDescuento3.calcularImporteDescuento(),0);
-		assertEquals(32,itemDescuento4.calcularImporteDescuento(),0);
-		assertEquals(50,itemDescuento5.calcularImporteDescuento(),0);
-		assertEquals(72,itemDescuento6.calcularImporteDescuento(),0);
+		assertEquals(15,itemDescuento3.calcularImporteDescuento(),0);
+		assertEquals(8,itemDescuento4.calcularImporteDescuento(),0);
+		assertEquals(10,itemDescuento5.calcularImporteDescuento(),0);
+		assertEquals(12,itemDescuento6.calcularImporteDescuento(),0);
 	}
 
 }

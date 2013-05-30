@@ -1,6 +1,7 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.ItemVentaNoEstaAsociadoANingunaVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 
 public interface IItemVenta extends Identificable{
@@ -14,5 +15,7 @@ public interface IItemVenta extends Identificable{
 	void setVenta(IVenta venta);
 
 	double getImporteSinDescuento();
+	
+	double calcularImporteConDescuento(RepositorioPromociones repositorioPromociones);
 
 }

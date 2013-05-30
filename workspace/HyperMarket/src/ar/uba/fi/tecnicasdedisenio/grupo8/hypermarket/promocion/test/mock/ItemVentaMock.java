@@ -3,6 +3,7 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
 public class ItemVentaMock implements IItemVenta{
 
@@ -49,6 +50,12 @@ public class ItemVentaMock implements IItemVenta{
 	@Override
 	public long getId() {
 		return 0;
+	}
+
+	@Override
+	public double calcularImporteConDescuento(
+			RepositorioPromociones repositorioPromociones) {
+		throw new UnsupportedOperationException();
 	}
 
 }
