@@ -1,5 +1,6 @@
 package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -12,6 +13,8 @@ public class ItemDescuento {
 	private RepositorioPromociones repositorioPromociones;
 	private double importeDescuentoVenta;
 	private boolean importeDescuentoVentaCalculado;
+	private IEstrategiaAplicacionPromocione estrategiaAplicacionPromociones=
+			new EstrategiaAplicaElMayorDescuentoPorItem();
 
 	public ItemDescuento(IItemVenta itemVenta, RepositorioPromociones repositorioPromociones) {
 		this.setItemVenta(itemVenta);
@@ -35,8 +38,13 @@ public class ItemDescuento {
 	}
 	
 	public double calcularImporteDescuento() {
-		IPromocion promocionAAplicar = this.getIPromocionAAplicar();
-		this.importeDescuentoVenta=promocionAAplicar.getImporteADescontar(this.itemVenta);
+		Collection<IPromocion> promocionesAAplicar = this.getPromocionesAAplicar();
+		Iterator<IPromocion> iterPromocionAAplicar = promocionesAAplicar.iterator();
+		this.importeDescuentoVenta=0;
+		while (iterPromocionAAplicar.hasNext()){
+			IPromocion promocionAAplicar=iterPromocionAAplicar.next();
+			this.importeDescuentoVenta=promocionAAplicar.getImporteADescontar(this.itemVenta);
+		}
 		this.importeDescuentoVentaCalculado=true;
 		return this.importeDescuentoVenta;
 	}
@@ -47,22 +55,11 @@ public class ItemDescuento {
 		return this.importeDescuentoVenta;
 	}
 
-	private IPromocion getIPromocionAAplicar() {
+	private Collection<IPromocion> getPromocionesAAplicar() {
 		Collection<IPromocion> promocionesAplicaItem=
-				this.repositorioPromociones.getPromocionesAplicaItemVenta(this.itemVenta);
-		
-		Iterator<IPromocion> iterIPromocion;
-		iterIPromocion=promocionesAplicaItem.iterator();
+				this.getRepositorioPromociones().getPromocionesAplicaItemVenta(this.itemVenta);
 
-		IPromocion promocionAAplicar=Promocion.crearPromocionNoAplicable();
-		
-		while(iterIPromocion.hasNext()){
-			IPromocion promocion=iterIPromocion.next();
-			if (promocion.getImporteADescontar(this.itemVenta)>=
-				promocionAAplicar.getImporteADescontar(this.itemVenta))
-				promocionAAplicar=promocion;
-		}
-		return promocionAAplicar;
+		return this.estrategiaAplicacionPromociones.getPromocionesAAplicar(this.itemVenta,promocionesAplicaItem);
 	}
 
 }
