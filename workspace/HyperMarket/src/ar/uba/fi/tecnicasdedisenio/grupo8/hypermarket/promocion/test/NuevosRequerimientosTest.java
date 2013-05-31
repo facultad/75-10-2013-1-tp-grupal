@@ -27,6 +27,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.EstrategiaAplica
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IEstrategiaAplicacionPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.IPromocion;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ProveedorEstrategia;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionEstadoLaboral;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
@@ -34,11 +35,10 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondi
 
 public class NuevosRequerimientosTest {
 
-	
-	//TODO: Considerar la hipotesis en el informe
 	@Test
 	public void testPromocionesRequerimiento1() {
 		IEstrategiaAplicacionPromociones  estrategiaBase = new EstrategiaAplicaElMayorDescuentoPorItem();
+		
 		RepositorioPromociones repositorioPromocionesObligatorias = new RepositorioPromociones();
 		
 		IEstadoLaboral jubilado = new EstadoLaboral("Jubilado");
@@ -48,6 +48,7 @@ public class NuevosRequerimientosTest {
 		repositorioPromocionesObligatorias.add(promocionJubilado);
 		
 		IEstrategiaAplicacionPromociones estrategia = new EstrategiaAdicionaPromocionesObligatorias(estrategiaBase, repositorioPromocionesObligatorias);
+		
 		
 		IProducto maceta = new Producto(10);
 		ICondicionPromocion condicionEsMaceta = new CondicionProducto(maceta);
@@ -72,9 +73,13 @@ public class NuevosRequerimientosTest {
 			repositorioDePromocionesAplicables.add(promocion);
 		}
 		
-		venta.calcularDescuento(repositorioDePromocionesAplicables);
+		repositorioDePromocionesAplicables.add(promocionMaceta);
 		
-		assertEquals(10*0.9*0.9, venta.getImporteTotalConDescuento(),0);		
+		ProveedorEstrategia.getInstance().setEstrategia(estrategia);
+		venta.calcularDescuento(repositorioDePromocionesAplicables);
+		assertEquals(10-10*0.1-10*0.1, venta.getImporteTotalConDescuento(),0);
+		ProveedorEstrategia.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
+		
 	}
 	
 	@Test

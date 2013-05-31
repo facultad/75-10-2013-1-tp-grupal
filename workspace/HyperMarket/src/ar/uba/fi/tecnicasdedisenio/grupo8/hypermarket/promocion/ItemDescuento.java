@@ -12,8 +12,6 @@ public class ItemDescuento {
 	private RepositorioPromociones repositorioPromociones;
 	private double importeDescuentoVenta;
 	private boolean importeDescuentoVentaCalculado;
-	private IEstrategiaAplicacionPromociones estrategiaAplicacionPromociones=
-			new EstrategiaAplicaElMayorDescuentoPorItem();
 
 	public ItemDescuento(IItemVenta itemVenta, RepositorioPromociones repositorioPromociones) {
 		this.setItemVenta(itemVenta);
@@ -58,7 +56,13 @@ public class ItemDescuento {
 		Collection<IPromocion> promocionesAplicaItem=
 				this.getRepositorioPromociones().getPromocionesAplicaItemVenta(this.itemVenta);
 
-		return this.estrategiaAplicacionPromociones.getPromocionesAAplicar(this.itemVenta,promocionesAplicaItem);
+		return this.getEstrategiaAplicacionPromociones().getPromocionesAAplicar(this.itemVenta,promocionesAplicaItem);
 	}
+
+	private IEstrategiaAplicacionPromociones getEstrategiaAplicacionPromociones() {
+		return ProveedorEstrategia.getInstance().getEstrategia();
+	}
+	
+	
 
 }
