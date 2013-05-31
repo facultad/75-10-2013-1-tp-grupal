@@ -12,7 +12,7 @@ public class ItemDescuento {
 	private RepositorioPromociones repositorioPromociones;
 	private double importeDescuentoVenta;
 	private boolean importeDescuentoVentaCalculado;
-	private IEstrategiaAplicacionPromocione estrategiaAplicacionPromociones=
+	private IEstrategiaAplicacionPromociones estrategiaAplicacionPromociones=
 			new EstrategiaAplicaElMayorDescuentoPorItem();
 
 	public ItemDescuento(IItemVenta itemVenta, RepositorioPromociones repositorioPromociones) {

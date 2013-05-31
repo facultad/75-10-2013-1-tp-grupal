@@ -117,5 +117,8 @@ public class AperturaCaja {
 		return importeTotalPorMedioPago;
 	}
 
+	public Collection<IVenta> getVentas() {
+		return ventas;
+	}
 	
 }

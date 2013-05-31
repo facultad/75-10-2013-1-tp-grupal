@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.EstadoLaboral;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IEstadoLaboral;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ISucursal;
@@ -109,6 +111,18 @@ public class VentaMock implements IVenta {
 	@Override
 	public IMedioPago getMedioPago() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public IEstadoLaboral getEstadoLaboral() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setEstadoLaboral(IEstadoLaboral jubilado) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

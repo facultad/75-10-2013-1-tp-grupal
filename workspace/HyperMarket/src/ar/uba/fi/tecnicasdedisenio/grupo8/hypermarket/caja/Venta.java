@@ -19,12 +19,20 @@ public class Venta implements IVenta{
 	private Date fechaVenta=new Date();
 	private long id = IdGenerator.getInstance().getNewId();
 	private DescuentoVenta descuentoVenta;
+	private IEstadoLaboral estadoLaboral;
 	
 	public Venta(ISucursal sucu, IMedioPago mpago){
 		this.listaItems = new ArrayList<IItemVenta>();
 		this.sucursal=sucu;
 		this.mediopago=mpago;
 		this.id= IdGenerator.getInstance().getNewId();
+	}
+	
+	public IEstadoLaboral getEstadoLaboral() {
+		return estadoLaboral;
+	}
+	public void setEstadoLaboral(IEstadoLaboral estadoLaboral) {
+		this.estadoLaboral = estadoLaboral;
 	}
 	
 	public ISucursal getSucursal(){

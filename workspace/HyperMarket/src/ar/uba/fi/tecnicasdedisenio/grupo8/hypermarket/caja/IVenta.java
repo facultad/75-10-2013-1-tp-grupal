@@ -34,4 +34,9 @@ public interface IVenta extends Identificable{
 	void setMedioPago(IMedioPago medioPago);
 
 	IMedioPago getMedioPago();
+	
+	IEstadoLaboral getEstadoLaboral();
+
+	void setEstadoLaboral(IEstadoLaboral estadoLaboral);
+	
 }

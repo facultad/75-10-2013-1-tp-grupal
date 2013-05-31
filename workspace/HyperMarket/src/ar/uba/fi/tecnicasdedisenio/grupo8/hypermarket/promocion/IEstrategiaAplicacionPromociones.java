@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 
-public interface IEstrategiaAplicacionPromocione {
+public interface IEstrategiaAplicacionPromociones {
 
 	Collection<IPromocion> getPromocionesAAplicar(IItemVenta itemVenta,
 			Collection<IPromocion> promocionesQueAplicanAlItem);

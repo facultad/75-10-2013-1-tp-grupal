@@ -7,7 +7,7 @@ import java.util.Iterator;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 
 public class EstrategiaAplicaElMayorDescuentoPorItem implements
-		IEstrategiaAplicacionPromocione {
+		IEstrategiaAplicacionPromociones {
 
 	@Override
 	public Collection<IPromocion> getPromocionesAAplicar(IItemVenta itemVenta,

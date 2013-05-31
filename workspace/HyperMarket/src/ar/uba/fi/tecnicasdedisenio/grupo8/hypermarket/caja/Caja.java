@@ -2,8 +2,11 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.CajaCerradaException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.CajaYaAbiertaException;
@@ -15,7 +18,7 @@ public class Caja {
 	private AperturaCaja aperturaCajaActual;
 	private Collection<AperturaCaja> aperturas=new ArrayList<AperturaCaja>();
 	private ISucursal sucursal;
-
+	
 	public Caja(ISucursal sucursal){
 		this.sucursal=sucursal;
 	}
@@ -130,5 +133,37 @@ public class Caja {
 		}
 		
 		return importeTotalPorMedioPago;
+	}
+
+	public TreeMap<IProducto, Integer> obtenerRankingProductosMasVendidos() {
+
+		TreeMap<IProducto, Integer> ranking = new TreeMap<IProducto, Integer>();
+		
+		for (AperturaCaja apertura : aperturas) {
+			Collection<IVenta> ventas = apertura.getVentas();
+			
+			for (IVenta venta : ventas) {
+				Iterator<IItemVenta> iterator = venta.getItemsIterator(); 
+				do {
+					ItemVenta itemVenta = (ItemVenta) iterator.next();
+					if (itemVenta != null) {
+						IProducto producto = itemVenta.getProducto();
+						Integer cantidad = new Integer(itemVenta.getCantidadProductos());
+						
+						Integer total = ranking.get(producto);
+						if (total == null) {
+							total = cantidad;
+						}
+						else {
+							total = total + cantidad;
+						}
+						
+						ranking.put(producto, total);
+					}					
+				} while(iterator.hasNext());			
+			}
+		}
+		
+		return ranking;
 	}
 }
