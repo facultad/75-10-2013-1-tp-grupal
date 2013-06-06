@@ -7,7 +7,9 @@ import java.util.Map;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.VentaNoIniciadaException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.VentaYaIniciada;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CuponDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorPromociones;
 
 public class AperturaCaja {
 
@@ -40,7 +42,13 @@ public class AperturaCaja {
 		this.ventaActual.addItem(new ItemVenta(producto, cantidad));
 	}
 
-	public double getImporteVentaActual() {
+	public double getImporteVentaActualSinDescuento() {
+		if (!this.ventaIniciada())
+			throw new VentaNoIniciadaException();
+		return this.getVentaActual().getImporteTotalSinDescuento();
+	}
+
+	public double getImporteVentaActualConDescuento() {
 		if (!this.ventaIniciada())
 			throw new VentaNoIniciadaException();
 		this.getVentaActual().calcularDescuento(ProveedorPromociones.getInstance().getPromociones());
@@ -120,5 +128,17 @@ public class AperturaCaja {
 	public Collection<IVenta> getVentas() {
 		return ventas;
 	}
-	
+
+	public void addCuponDescuentoVentaActual(CuponDescuento cuponDescuento) {
+		if (!this.ventaIniciada())
+			throw new VentaNoIniciadaException();
+		this.getVentaActual().addCuponDescuento(cuponDescuento);
+	}
+
+	public Collection<CuponDescuento> getCuponesProximaVenta() {
+		if (!this.ventaIniciada())
+			throw new VentaNoIniciadaException();
+		return this.getVentaActual().getCuponesProximaVenta();
+	}
+
 }

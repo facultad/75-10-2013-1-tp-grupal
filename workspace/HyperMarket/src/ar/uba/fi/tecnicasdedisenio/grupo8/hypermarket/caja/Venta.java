@@ -7,9 +7,12 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.DescuentoNoCalculadoException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.DescuentoVentaNoCalculado;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.estrategia.IEstrategiaGeneracionCupones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CuponDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.DescuentoVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorGeneradorCupones;
 
 public class Venta implements IVenta{
 	private ArrayList<IItemVenta> listaItems;
@@ -20,6 +23,7 @@ public class Venta implements IVenta{
 	private long id = IdGenerator.getInstance().getNewId();
 	private DescuentoVenta descuentoVenta;
 	private IEstadoLaboral estadoLaboral;
+	private Collection<CuponDescuento> cuponesAAplicar=new ArrayList<CuponDescuento>();	
 	
 	public Venta(ISucursal sucu, IMedioPago mpago){
 		this.listaItems = new ArrayList<IItemVenta>();
@@ -129,6 +133,29 @@ public class Venta implements IVenta{
 	@Override
 	public IMedioPago getMedioPago() {
 		return this.mediopago;
+	}
+
+	@Override
+	public void addCuponDescuento(CuponDescuento cuponDescuento) {
+		this.cuponesAAplicar.add(cuponDescuento);
+	}
+
+	@Override
+	public Collection<CuponDescuento> getCupones() {
+		return this.cuponesAAplicar;
+	}
+
+	@Override
+	public Collection<CuponDescuento> getCuponesProximaVenta() {
+		if (!this.descuentoVentaCalculado())
+			throw new DescuentoVentaNoCalculado();
+		IEstrategiaGeneracionCupones generadorCupones=ProveedorGeneradorCupones.getInstance();
+		return generadorCupones.generarCupones(this);
+	}
+
+	@Override
+	public Collection<IItemVenta> getItemsVenta() {
+		return this.listaItems;
 	}
 
 }

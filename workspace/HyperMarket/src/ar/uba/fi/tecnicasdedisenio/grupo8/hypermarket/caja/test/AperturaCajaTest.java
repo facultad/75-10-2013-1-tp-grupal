@@ -9,7 +9,6 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.MedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Producto;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ProveedorPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.Sucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.VentaNoIniciadaException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.VentaYaIniciada;
@@ -19,6 +18,7 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromo
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.ICondicionPromocion;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorPromociones;
 
 public class AperturaCajaTest {
 
@@ -98,7 +98,7 @@ public class AperturaCajaTest {
 		
 		assertTrue(aperturaCaja.ventaIniciada());
 		assertEquals(1,aperturaCaja.getImporteTotalConDescuentoPorMedioPago().size());
-		assertEquals(aperturaCaja.getImporteVentaActual(), 3*10,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 3*10,0);
 
 		aperturaCaja.confirmarVentaActual();
 		
@@ -108,12 +108,12 @@ public class AperturaCajaTest {
 		
 		assertTrue(aperturaCaja.ventaIniciada());
 		assertEquals(1,aperturaCaja.getImporteTotalConDescuentoPorMedioPago().size());
-		assertEquals(aperturaCaja.getImporteVentaActual(), 2*9,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 2*9,0);
 		
 		aperturaCaja.confirmarVentaActual();
 		
 		try {
-			aperturaCaja.getImporteVentaActual();
+			aperturaCaja.getImporteVentaActualConDescuento();
 			fail();
 		} catch (VentaNoIniciadaException e) {
 			// OK! Prueba superada!
@@ -137,7 +137,7 @@ public class AperturaCajaTest {
 		
 		assertTrue(aperturaCaja.ventaIniciada());
 		assertEquals(1,aperturaCaja.getImporteTotalConDescuentoPorMedioPago().size());
-		assertEquals(aperturaCaja.getImporteVentaActual(), 2*10,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 2*10,0);
 		assertEquals(1, aperturaCaja.getItemsDescuentoVentaActual().size());
 		assertEquals(10, aperturaCaja.getItemsDescuentoVentaActual().iterator().next().getImporteDescuento(),0);
 		
@@ -147,7 +147,7 @@ public class AperturaCajaTest {
 		IProducto pepsi=new Producto(9);
 		aperturaCaja.addProducto(pepsi, 2);
 		
-		assertEquals(aperturaCaja.getImporteVentaActual(), 2*9,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 2*9,0);
 		assertEquals(1,aperturaCaja.getItemsDescuentoVentaActual().size());
 		assertEquals(0, aperturaCaja.getItemsDescuentoVentaActual().iterator().next().getImporteDescuento(),0);
 		
@@ -174,7 +174,7 @@ public class AperturaCajaTest {
 		assertTrue(aperturaCaja.ventaIniciada());
 		assertEquals(1,aperturaCaja.getImporteTotalConDescuentoPorMedioPago().size());
 		assertTrue(aperturaCaja.getImporteTotalConDescuentoPorMedioPago().containsKey(efectivo));
-		assertEquals(aperturaCaja.getImporteVentaActual(), 3*10*0.9,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 3*10*0.9,0);
 		assertEquals(1, aperturaCaja.getItemsDescuentoVentaActual().size());
 		assertEquals(3*10*0.1, aperturaCaja.getItemsDescuentoVentaActual().iterator().next().getImporteDescuento(),0);
 		
@@ -188,7 +188,7 @@ public class AperturaCajaTest {
 		IProducto pepsi=new Producto(9);
 		aperturaCaja.addProducto(pepsi, 2);
 		
-		assertEquals(aperturaCaja.getImporteVentaActual(), 2*9,0);
+		assertEquals(aperturaCaja.getImporteVentaActualConDescuento(), 2*9,0);
 		assertEquals(2,aperturaCaja.getImporteTotalConDescuentoPorMedioPago().size());
 		assertTrue(aperturaCaja.getImporteTotalConDescuentoPorMedioPago().containsKey(debito));
 		assertTrue(aperturaCaja.getImporteTotalConDescuentoPorMedioPago().containsKey(efectivo));

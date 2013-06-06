@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.estrategia.IEstrategiaAplicacionCupones;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorEstrategiaAplicacionCupones;
 
 public class DescuentoVenta {
 
@@ -34,6 +36,12 @@ public class DescuentoVenta {
 			this.importeDescuentoVenta+=itemDescuento.calcularImporteDescuento();
 		}
 
+		IEstrategiaAplicacionCupones estrategiaAplicacionCupones=
+				ProveedorEstrategiaAplicacionCupones.getInstance();
+
+		this.importeDescuentoVenta+=
+				estrategiaAplicacionCupones.getImporteDescuento(this.venta);
+		
 		this.importeDescuentoVentaCalculado=true;
 		return this.importeDescuentoVenta;
 	}

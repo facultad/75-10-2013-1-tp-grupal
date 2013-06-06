@@ -7,22 +7,22 @@ import org.junit.Test;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.EstrategiaAplicaElMayorDescuentoPorItem;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.estrategia.EstrategiaAplicaElMayorDescuentoPorItem;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.Promocion;
-import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ProveedorEstrategia;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionDependiente;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.condicion.CondicionProducto;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ItemVentaMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.ProductoMock;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.test.mock.VentaMock;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorEstrategiaAplicacionPromociones;
 
 public class ItemDescuentoTest {
 
 	@Test
 	public void descuentoAplicadoProducto() {
-		ProveedorEstrategia.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());		IProducto producto=new ProductoMock(1,10);
+		ProveedorEstrategiaAplicacionPromociones.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());		IProducto producto=new ProductoMock(1,10);
 		IItemVenta itemVenta=new ItemVentaMock(producto, 3);
 		
 		RepositorioPromociones repositorioPromociones=new RepositorioPromociones();
@@ -35,7 +35,7 @@ public class ItemDescuentoTest {
 	
 	@Test
 	public void testMayorDescuentoAplicadoProducto() {
-		ProveedorEstrategia.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
+		ProveedorEstrategiaAplicacionPromociones.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
 		IProducto producto=new ProductoMock(1,10);
 		IItemVenta itemVenta;
 		ItemDescuento itemDescuento;
@@ -79,7 +79,7 @@ public class ItemDescuentoTest {
 
 	@Test
 	public void descuentoAplicadoDependiente() {
-		ProveedorEstrategia.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
+		ProveedorEstrategiaAplicacionPromociones.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
 		IProducto producto1=new ProductoMock(1,10);
 		IProducto producto2=new ProductoMock(2,20);
 		IProducto producto3=new ProductoMock(3,30);
@@ -108,7 +108,7 @@ public class ItemDescuentoTest {
 
 	@Test
 	public void testMayorDescuentoConDependenciaAplicado() {
-		ProveedorEstrategia.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
+		ProveedorEstrategiaAplicacionPromociones.getInstance().setEstrategia(new EstrategiaAplicaElMayorDescuentoPorItem());
 		IProducto producto1=new ProductoMock(1,10);
 		IProducto producto2=new ProductoMock(2,20);
 		IProducto producto3=new ProductoMock(3,30);

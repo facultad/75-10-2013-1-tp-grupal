@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CuponDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
@@ -38,5 +39,13 @@ public interface IVenta extends Identificable{
 	IEstadoLaboral getEstadoLaboral();
 
 	void setEstadoLaboral(IEstadoLaboral estadoLaboral);
+
+	void addCuponDescuento(CuponDescuento cuponDescuento);
+
+	Collection<CuponDescuento> getCupones();
+
+	Collection<CuponDescuento> getCuponesProximaVenta();
+
+	Collection<IItemVenta> getItemsVenta();
 	
 }

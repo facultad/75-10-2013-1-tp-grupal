@@ -4,7 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.estrategia.IEstrategiaAplicacionPromociones;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.excepciones.ImporteDescuentoNoCalculado;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton.ProveedorEstrategiaAplicacionPromociones;
 
 public class ItemDescuento {
 
@@ -60,7 +62,7 @@ public class ItemDescuento {
 	}
 
 	private IEstrategiaAplicacionPromociones getEstrategiaAplicacionPromociones() {
-		return ProveedorEstrategia.getInstance().getEstrategia();
+		return ProveedorEstrategiaAplicacionPromociones.getInstance().getEstrategia();
 	}
 	
 	

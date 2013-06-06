@@ -1,4 +1,4 @@
-package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
+package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.singleton;
 
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.RepositorioPromocionesIvalido;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;

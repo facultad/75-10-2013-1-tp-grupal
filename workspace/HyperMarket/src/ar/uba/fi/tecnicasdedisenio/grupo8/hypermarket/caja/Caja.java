@@ -2,7 +2,6 @@ package ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,6 +10,7 @@ import java.util.TreeMap;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.CajaCerradaException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.CajaYaAbiertaException;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.excepciones.CajaYaCerradaException;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CuponDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 
 public class Caja {
@@ -59,7 +59,7 @@ public class Caja {
 	public double getImporteVentaActual(){
 		if (this.cerrada())
 			throw new CajaCerradaException();
-		return this.getAperturaCajaActual().getImporteVentaActual();
+		return this.getAperturaCajaActual().getImporteVentaActualConDescuento();
 	}
 	
 	public Collection<ItemDescuento> getItemsDescuentoVentaActual(){
@@ -165,5 +165,29 @@ public class Caja {
 		}
 		
 		return ranking;
+	}
+
+	public void addCuponDescuentoVentaActual(CuponDescuento cuponDescuento) {
+		if (this.cerrada())
+			throw new CajaCerradaException();
+		this.aperturaCajaActual.addCuponDescuentoVentaActual(cuponDescuento);
+	}
+
+	public double getImporteVentaSinDescuento() {
+		if (this.cerrada())
+			throw new CajaCerradaException();
+		return this.aperturaCajaActual.getImporteVentaActualSinDescuento();
+	}
+
+	public double getImporteVentaConDescuento() {
+		if (this.cerrada())
+			throw new CajaCerradaException();
+		return this.aperturaCajaActual.getImporteVentaActualConDescuento();
+	}
+
+	public Collection<CuponDescuento> getCuponesProximaVenta() {
+		if (this.cerrada())
+			throw new CajaCerradaException();
+		return this.getAperturaCajaActual().getCuponesProximaVenta();
 	}
 }

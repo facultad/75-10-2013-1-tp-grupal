@@ -11,6 +11,8 @@ import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IItemVenta;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IMedioPago;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ISucursal;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.IVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.caja.ItemVenta;
+import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.CuponDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.ItemDescuento;
 import ar.uba.fi.tecnicasdedisenio.grupo8.hypermarket.promocion.RepositorioPromociones;
 
@@ -115,17 +117,32 @@ public class VentaMock implements IVenta {
 
 	@Override
 	public IEstadoLaboral getEstadoLaboral() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setEstadoLaboral(IEstadoLaboral jubilado) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addCuponDescuento(CuponDescuento cuponDescuento) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<CuponDescuento> getCupones() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<CuponDescuento> getCuponesProximaVenta() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Collection<IItemVenta> getItemsVenta() {
+		throw new UnsupportedOperationException();
 	}
 	
-
-	
-
 }
