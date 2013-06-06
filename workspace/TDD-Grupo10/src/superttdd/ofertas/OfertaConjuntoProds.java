@@ -33,6 +33,7 @@ public class OfertaConjuntoProds extends Oferta {
 			return;
 		}
 
+		// SMELL #2 es un codigo autodocumentado - innecesario el comment
 		while (hubo_coincidencias) {
 			/*
 			 * Por cada registro de la oferta, busca en todos los productos si
@@ -63,6 +64,7 @@ public class OfertaConjuntoProds extends Oferta {
 		}
 	}
 
+	// SMELL #3 los nombres de los métodos no dejan en claro que es lo que sucede
 	private void generarCombos(List<IProducto> productos,
 			List<IProducto> productos_encontrados,
 			List<RegistroProducto> copia_registros) {

@@ -1,5 +1,7 @@
 package superttdd.producto;
 
+import org.hamcrest.core.IsInstanceOf;
+
 public class Producto implements IProducto {
 
 	private RegistroProducto registroProducto;
@@ -100,8 +102,11 @@ public class Producto implements IProducto {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		Producto producto = (Producto)o;
+	public boolean equals(Object o) {		
+		if(!(o instanceof Producto)) {
+			return false;
+		}
+		Producto producto = (Producto)o;		
 		return (producto.porcentajeDescuento==this.porcentajeDescuento) && 
 				(producto.registroProducto.equals(this.registroProducto));
 	}

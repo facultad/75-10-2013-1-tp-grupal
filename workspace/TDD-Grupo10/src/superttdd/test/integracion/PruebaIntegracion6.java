@@ -20,23 +20,23 @@ import superttdd.promociones.PromoCuponFuturo;
 
 public class PruebaIntegracion6 {
 	/*
-	 * Cupón de descuento:
+	 * Cup��n de descuento:
 		El mismo se genera en un compra pero no descuenta en la misma sino que sirve para ser usada en una futura compra. 
 		===================
 		
 		Dado que:
-		- Existe descuento "futuro" (para la próxima venta) de 2x1 en cocas.
+		- Existe descuento "futuro" (para la pr��xima venta) de 2x1 en cocas.
 		- La coca vale $1.
-		- El cupón de descuento no puede descontar mas del 20% de la venta.
-		 
-		Cuando: 
-		- Se realiza una venta de: 10 cocas con un cupón de descuento de $10.
+		- El cup��n de descuento no puede descontar mas del 20% de la venta.
+		��
+		Cuando:��
+		- Se realiza una venta de: 10 cocas con un cup��n de descuento de $10.
 		
 		Entonces:
-		- El precio final de la venta debe ser: 
-		($10 (10 cocas)) - $2 (cupón de $10 limitado al 20% de la venta)
-		- Hay un descuento de $2 por limite del 20% de la venta del Cupón de $10.
-		- Se genera un Bono de descuento para próxima compra de $5 (por el 2x1 de 10 cocas)
+		- El precio final de la venta debe ser:��
+		($10 (10 cocas)) - $2 (cup��n de $10 limitado al 20% de la venta)
+		- Hay un descuento de $2 por limite del 20% de la venta del Cup��n de $10.
+		- Se genera un Bono de descuento para pr��xima compra de $5 (por el 2x1 de 10 cocas)
 	 * */
 
 	private CuponDescuento cuponDescuento;
@@ -70,7 +70,7 @@ public class PruebaIntegracion6 {
 	
 	@Test 
 	public void pruebaCompraConCuponDescuneto() {
-		//TODO: Falta agregar validación de generación de cupones futuros
+		//TODO: Falta agregar validaci��n de generaci��n de cupones futuros
 		caja.abrirCaja();
 		caja.cargarDescuentosCuponesFuturos(cuponesFuturos);
 		
